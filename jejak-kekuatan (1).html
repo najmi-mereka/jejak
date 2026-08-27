@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEJAK — Cari Kekuatan &amp; Kerjaya Anda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#E8A33D;
+    --gold-deep:#C97F1F;
+    --brown:#5B3A22;
+    --brown-deep:#3E2A1C;
+    --green:#2F6E4F;
+    --green-deep:#1F4D37;
+    --red:#C8443A;
+    --cream:#FBF3E3;
+    --cream-2:#F3E5C8;
+    --ink:#221B14;
+    --paper:#FFFCF5;
+    --line:rgba(34,27,20,0.14);
+    --radius:18px;
+    --shadow: 0 10px 30px rgba(62,42,28,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, rgba(232,163,61,0.18), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(47,110,79,0.13), transparent 55%),
+      var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Baloo 2',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px;}
+
+  /* ---------- topbar ---------- */
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(155deg,var(--gold),var(--red));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);flex-shrink:0;}
+  .brand-mark svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:1.15rem;letter-spacing:0.01em;}
+  .brand-sub{font-size:0.72rem;color:var(--brown);opacity:0.75;margin-top:-2px;}
+
+  .lang-toggle{display:flex;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:3px;box-shadow:var(--shadow);}
+  .lang-toggle button{border:none;background:transparent;padding:7px 14px;border-radius:999px;font-weight:700;font-size:0.78rem;cursor:pointer;color:var(--brown);transition:all .18s ease;}
+  .lang-toggle button.active{background:var(--ink);color:var(--cream);}
+
+  /* ---------- start screen ---------- */
+  .hero{background:var(--paper);border-radius:24px;padding:36px 28px;box-shadow:var(--shadow);border:1.5px solid var(--line);position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(232,163,61,0.35),transparent 70%);}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:0.72rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--green-deep);background:rgba(47,110,79,0.1);padding:6px 12px;border-radius:999px;margin-bottom:16px;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green-deep);}
+  .hero h1{font-size:2.15rem;line-height:1.12;margin:0 0 12px;font-weight:800;color:var(--brown-deep);}
+  .hero h1 span{color:var(--red);}
+  .hero p.lead{font-size:1.02rem;line-height:1.55;color:var(--ink);opacity:0.85;max-width:56ch;margin:0 0 22px;}
+  .meta-row{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:26px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--brown);font-weight:600;}
+  .meta-item svg{width:16px;height:16px;flex-shrink:0;}
+  .start-btn{background:var(--ink);color:var(--cream);border:none;border-radius:14px;padding:15px 26px;font-size:1rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(34,27,20,0.28);transition:transform .15s ease, box-shadow .15s ease;}
+  .start-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(34,27,20,0.32);}
+  .start-btn svg{width:18px;height:18px;}
+
+  .type-preview{margin-top:30px;}
+  .type-preview .cap{font-size:0.78rem;font-weight:700;color:var(--brown);opacity:0.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.07em;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:0.78rem;font-weight:600;padding:6px 12px 6px 8px;border-radius:999px;border:1.5px solid var(--line);background:var(--cream-2);color:var(--brown-deep);display:inline-flex;align-items:center;gap:7px;}
+  .chip-code{font-size:0.7rem;font-weight:700;background:var(--brown-deep);color:var(--cream);padding:2px 7px;border-radius:999px;letter-spacing:0.03em;}
+
+  /* ---------- quiz screen ---------- */
+  .quiz-card{background:var(--paper);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow);border:1.5px solid var(--line);}
+  .trail{display:flex;align-items:center;gap:4px;margin-bottom:22px;}
+  .trail-track{flex:1;height:10px;border-radius:999px;background:var(--cream-2);position:relative;overflow:hidden;border:1px solid var(--line);}
+  .trail-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--red));transition:width .35s ease;}
+  .trail-label{font-size:0.75rem;font-weight:700;color:var(--brown);white-space:nowrap;padding-left:10px;}
+
+  .q-num{font-size:0.78rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+  .q-text{font-size:1.28rem;font-weight:700;line-height:1.4;color:var(--brown-deep);margin:0 0 22px;font-family:'Baloo 2',sans-serif;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option{
+    text-align:left;
+    background:var(--cream);
+    border:1.6px solid var(--line);
+    border-radius:14px;
+    padding:15px 18px;
+    font-size:0.97rem;
+    font-weight:500;
+    color:var(--ink);
+    cursor:pointer;
+    line-height:1.4;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:all .15s ease;
+  }
+  .option .letter{
+    flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--paper);border:1.6px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:0.78rem;color:var(--brown);
+  }
+  .option:hover{background:var(--cream-2);border-color:var(--gold-deep);transform:translateX(2px);}
+  .option:hover .letter{background:var(--gold);border-color:var(--gold-deep);color:var(--brown-deep);}
+
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:0.82rem;font-weight:600;color:var(--brown);opacity:0.7;background:none;border:none;cursor:pointer;padding:4px;}
+  .back-link:hover{opacity:1;}
+
+  /* ---------- results ---------- */
+  .result-card{background:linear-gradient(160deg,var(--brown-deep),var(--ink));border-radius:24px;padding:4px;box-shadow:var(--shadow);}
+  .result-inner{background:var(--paper);border-radius:20px;padding:30px 26px;position:relative;overflow:hidden;}
+  .kad-strip{position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,var(--gold),var(--red),var(--green));}
+  .kad-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;gap:14px;}
+  .kad-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--brown);opacity:0.6;}
+  .kad-code{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:600;color:var(--red);background:rgba(200,68,58,0.09);padding:4px 10px;border-radius:8px;}
+
+  .code-hero{display:flex;align-items:center;gap:16px;margin-bottom:4px;}
+  .code-hero-badge{font-family:'Baloo 2',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:0.01em;color:var(--brown-deep);}
+  .code-hero-sub{font-size:0.82rem;font-weight:600;color:var(--brown);opacity:0.75;margin-top:4px;}
+  .letter-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+  .legend-pill{display:flex;align-items:center;gap:6px;font-size:0.74rem;font-weight:600;color:var(--brown-deep);background:var(--cream);border:1.5px solid var(--line);border-radius:999px;padding:5px 10px 5px 6px;}
+  .legend-pill.on{background:var(--brown-deep);color:var(--cream);border-color:var(--brown-deep);}
+  .legend-letter{width:20px;height:20px;border-radius:6px;background:var(--cream-2);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.72rem;color:var(--brown-deep);}
+  .legend-pill.on .legend-letter{background:var(--cream);color:var(--brown-deep);}
+
+  .result-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--shadow);}
+  .result-icon svg{width:34px;height:34px;}
+  .result-title-row{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+  .result-name{font-size:1.85rem;font-weight:800;color:var(--brown-deep);margin:0;line-height:1.1;}
+  .result-name-en{font-size:0.95rem;font-weight:600;color:var(--red);margin:2px 0 0;}
+  .result-tagline{font-size:1rem;line-height:1.5;color:var(--ink);opacity:0.85;margin:14px 0 22px;padding:14px 16px;background:var(--cream-2);border-left:4px solid var(--gold-deep);border-radius:0 10px 10px 0;}
+
+  .section-title{font-size:0.98rem;font-weight:800;color:var(--brown-deep);margin:26px 0 12px;display:flex;align-items:center;gap:8px;font-family:'Baloo 2',sans-serif;}
+  .section-title svg{width:18px;height:18px;color:var(--red);}
+
+  .desc-text{font-size:0.96rem;line-height:1.7;color:var(--ink);opacity:0.88;}
+
+  .strength-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .strength-item{background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:0.87rem;font-weight:600;color:var(--brown-deep);display:flex;gap:8px;align-items:flex-start;}
+  .strength-item svg{width:15px;height:15px;flex-shrink:0;margin-top:2px;color:var(--green-deep);}
+
+  .bars{display:flex;flex-direction:column;gap:10px;}
+  .bar-row{display:flex;align-items:center;gap:10px;}
+  .bar-label{font-size:0.76rem;font-weight:700;color:var(--brown);width:92px;flex-shrink:0;}
+  .bar-track{flex:1;height:9px;border-radius:999px;background:var(--cream-2);overflow:hidden;}
+  .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--red));}
+  .bar-pct{width:34px;text-align:right;font-size:0.74rem;font-weight:700;color:var(--brown);font-family:'IBM Plex Mono',monospace;}
+
+  .career-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .career-chip{font-size:0.83rem;font-weight:600;padding:8px 13px;border-radius:11px;background:var(--green-deep);color:var(--cream);}
+
+  .celeb-grid{display:flex;flex-direction:column;gap:10px;}
+  .celeb-item{display:flex;gap:12px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;align-items:flex-start;}
+  .celeb-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(155deg,var(--gold),var(--red));flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-weight:800;font-size:0.9rem;font-family:'Baloo 2',sans-serif;}
+  .celeb-name{font-weight:700;font-size:0.9rem;color:var(--brown-deep);margin-bottom:2px;}
+  .celeb-note{font-size:0.83rem;color:var(--ink);opacity:0.78;line-height:1.4;}
+
+  .secondary-note{margin-top:24px;font-size:0.85rem;line-height:1.6;color:var(--brown);background:rgba(47,110,79,0.08);border-radius:12px;padding:14px 16px;}
+  .secondary-note b{color:var(--green-deep);}
+
+  .result-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;}
+  .btn-primary,.btn-ghost{border-radius:13px;padding:13px 20px;font-weight:700;font-size:0.88rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .btn-primary{background:var(--ink);color:var(--cream);border:none;}
+  .btn-ghost{background:transparent;color:var(--brown-deep);border:1.6px solid var(--line);}
+  .btn-primary svg,.btn-ghost svg{width:16px;height:16px;}
+
+  footer.disclaimer{margin-top:18px;font-size:0.74rem;color:var(--brown);opacity:0.55;line-height:1.5;text-align:center;padding:0 10px;}
+
+  @media (max-width:520px){
+    .wrap{padding:18px 14px 50px;}
+    .hero{padding:26px 20px;}
+    .hero h1{font-size:1.68rem;}
+    .quiz-card{padding:22px 18px;}
+    .q-text{font-size:1.1rem;}
+    .result-inner{padding:22px 18px;}
+    .strength-list{grid-template-columns:1fr;}
+    .result-title-row{gap:12px;}
+    .result-icon{width:52px;height:52px;}
+    .result-icon svg{width:28px;height:28px;}
+    .result-name{font-size:1.5rem;}
+  }
+
+  .fade-in{animation:fadeIn .35s ease both;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+  :focus-visible{outline:3px solid var(--gold-deep);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+/* ============================= DATA ============================= */
+
+const UI = {
+  brandName:{en:"JEJAK", bm:"JEJAK"},
+  brandSub:{en:"Strength & career trail for everyday Malaysians", bm:"Jejak kekuatan & kerjaya untuk rakyat Malaysia"},
+  heroEyebrow:{en:"A career-strengths quiz built for us", bm:"Kuiz kekuatan kerjaya untuk kita"},
+  heroTitle1:{en:"What's your ", bm:"Apakah "},
+  heroTitleHighlight:{en:"strength code?", bm:"kod kekuatan"},
+  heroTitle2:{en:"", bm:" anda?"},
+  heroLead:{en:"Answer 20 real-life situations — motorcycle breakdowns, gotong-royong, bonus money, rude customers — and find your own JEJAK code, from 10 strength types, plus the careers that actually fit you and the Malaysians who share your strengths.",
+             bm:"Jawab 20 situasi harian — motosikal rosak, gotong-royong, duit bonus, pelanggan garang — dan cari kod JEJAK anda sendiri, daripada 10 jenis kekuatan, kerjaya yang sesuai, serta tokoh Malaysia yang sama kekuatan dengan anda."},
+  meta1:{en:"20 quick questions", bm:"20 soalan ringkas"},
+  meta2:{en:"~5 minutes", bm:"~5 minit"},
+  meta3:{en:"10 strength types", bm:"10 jenis kekuatan"},
+  startBtn:{en:"Start the quiz", bm:"Mula kuiz"},
+  previewCap:{en:"The 10 types you could be", bm:"10 jenis kekuatan yang mungkin anda"},
+  qCounter:{en:(n,t)=>`Question ${n} of ${t}`, bm:(n,t)=>`Soalan ${n} daripada ${t}`},
+  back:{en:"Start over", bm:"Mula semula"},
+  yourType:{en:"Your strength type", bm:"Jenis kekuatan anda"},
+  strengthsTitle:{en:"Your core strengths", bm:"Kekuatan teras anda"},
+  deepDiveTitle:{en:"The deep dive", bm:"Cerita lanjut"},
+  breakdownTitle:{en:"Your strength breakdown", bm:"Pecahan kekuatan anda"},
+  careersTitle:{en:"Careers that fit you", bm:"Kerjaya yang sesuai untuk anda"},
+  celebsTitle:{en:"Malaysians (and others) who share your strengths", bm:"Tokoh yang sama kekuatan dengan anda"},
+  restartBtn:{en:"Take it again", bm:"Ulang kuiz"},
+  disclaimer:{en:"JEJAK is a self-reflection tool for fun and direction, not a clinical or scientific psychometric assessment. Use it as a starting point for conversations about your strengths — not a final verdict.",
+              bm:"JEJAK adalah alat refleksi diri untuk keseronokan dan panduan, bukan penilaian psikometrik saintifik. Gunakan ia sebagai titik permulaan untuk fikir tentang kekuatan anda — bukan penilaian muktamad."},
+  dims:{
+    h:{en:"Hustle", bm:"Semangat Juang"},
+    e:{en:"Empathy", bm:"Empati"},
+    c:{en:"Craft", bm:"Kemahiran Tangan"},
+    v:{en:"Vision", bm:"Wawasan"},
+    x:{en:"Creativity", bm:"Kreativiti"},
+    s:{en:"Structure", bm:"Struktur"}
+  },
+  alsoShows:{en:"You also show strong", bm:"Anda juga menunjukkan ciri kuat"},
+  traits:{en:"traits", bm:""},
+};
+
+const QUESTIONS = [
+{ q:{en:"Your motorcycle breaks down two days before payday. What's your first move?",
+     bm:"Motosikal anda rosak dua hari sebelum gaji masuk. Apakah langkah pertama anda?"},
+  opts:[
+    {t:{en:"Borrow a little and pick up weekend gig work to pay it back", bm:"Pinjam sikit dan cari kerja sampingan hujung minggu untuk bayar balik"}, d:"h"},
+    {t:{en:"Try to fix it myself with a YouTube tutorial and whatever tools I have", bm:"Cuba baiki sendiri guna tutorial YouTube dan alat yang ada"}, d:"c"},
+    {t:{en:"Check my emergency savings and re-plan the week's budget properly", bm:"Semak simpanan kecemasan dan susun semula bajet minggu ini"}, d:"s"},
+    {t:{en:"Ask a neighbour or relative for a lift to work in the meantime", bm:"Minta tolong jiran atau saudara tumpang ke kerja buat sementara"}, d:"e"},
+  ]},
+{ q:{en:"Your work group chat blows up over a dispute between two colleagues. You…",
+     bm:"Group chat tempat kerja anda kecoh sebab pergaduhan dua rakan sekerja. Anda…"},
+  opts:[
+    {t:{en:"Message both privately to calm things down and understand both sides", bm:"Mesej kedua-dua secara peribadi untuk redakan keadaan dan faham situasi"}, d:"e"},
+    {t:{en:"Step in with a clear solution and steer things forward", bm:"Turun padang dengan cadangan jelas dan gerakkan keadaan ke depan"}, d:"v"},
+    {t:{en:"Suggest a proper process so this doesn't keep happening", bm:"Cadangkan satu proses tetap supaya ini tak berulang"}, d:"s"},
+    {t:{en:"Crack a joke to ease the tension, then follow up quietly later", bm:"Buat lawak untuk cairkan suasana, kemudian tanya khabar diam-diam"}, d:"x"},
+  ]},
+{ q:{en:"You get an unexpected RM200 bonus. First thing you do?",
+     bm:"Anda dapat bonus RM200 yang tak dijangka. Apa perkara pertama anda buat?"},
+  opts:[
+    {t:{en:"Put it back into my side hustle — stock, tools, ads", bm:"Labur semula ke dalam side hustle saya — stok, alat, iklan"}, d:"h"},
+    {t:{en:"Straight into savings or the emergency fund", bm:"Terus masuk simpanan atau dana kecemasan"}, d:"s"},
+    {t:{en:"Share some with family or send a little back to kampung", bm:"Kongsi sikit dengan keluarga atau hantar balik ke kampung"}, d:"e"},
+    {t:{en:"Buy materials for a creative project I've wanted to try", bm:"Beli bahan untuk projek kreatif yang lama saya nak cuba"}, d:"x"},
+  ]},
+{ q:{en:"A free training voucher lands in your inbox. Which one do you pick?",
+     bm:"Baucar kursus percuma masuk dalam inbox anda. Mana satu anda pilih?"},
+  opts:[
+    {t:{en:"A hands-on technical or trade skill", bm:"Kemahiran teknikal atau vokasional yang praktikal"}, d:"c"},
+    {t:{en:"A leadership or small-business management skill", bm:"Kepimpinan atau pengurusan perniagaan kecil"}, d:"v"},
+    {t:{en:"A design or content-creation skill", bm:"Reka bentuk atau penciptaan kandungan"}, d:"x"},
+    {t:{en:"Admin, accounting, or digital office tools", bm:"Pentadbiran, perakaunan, atau alat pejabat digital"}, d:"s"},
+  ]},
+{ q:{en:"A customer at your counter is being rude. You…",
+     bm:"Pelanggan di kaunter anda bersikap kasar. Anda…"},
+  opts:[
+    {t:{en:"Stay calm, listen, and try to understand their frustration", bm:"Bertenang, dengar, dan cuba faham kekecewaan mereka"}, d:"e"},
+    {t:{en:"Resolve it firmly and fairly, then keep the line moving", bm:"Selesaikan dengan tegas dan adil, kemudian teruskan barisan pelanggan"}, d:"v"},
+    {t:{en:"Follow the official complaint procedure to the letter", bm:"Ikut prosedur aduan rasmi sepenuhnya"}, d:"s"},
+    {t:{en:"Smooth it over fast so other customers aren't affected", bm:"Selesaikan dengan cepat supaya pelanggan lain tak terjejas"}, d:"h"},
+  ]},
+{ q:{en:"At a community gotong-royong, you naturally end up…",
+     bm:"Semasa gotong-royong komuniti, anda secara semula jadi akan…"},
+  opts:[
+    {t:{en:"Organising who does what", bm:"Mengatur siapa buat apa"}, d:"v"},
+    {t:{en:"Fixing or building the physical stuff — tables, wiring, structures", bm:"Membaiki atau membina — meja, wayar, struktur"}, d:"c"},
+    {t:{en:"Making sure elders and kids are comfortable", bm:"Memastikan orang tua dan kanak-kanak selesa"}, d:"e"},
+    {t:{en:"Decorating and making it fun and memorable", bm:"Menghias dan buat suasana meriah"}, d:"x"},
+  ]},
+{ q:{en:"Boss asks for a volunteer to lead a small project with no extra pay. You…",
+     bm:"Bos minta sukarelawan untuk ketuai projek kecil tanpa bayaran tambahan. Anda…"},
+  opts:[
+    {t:{en:"Volunteer right away — you like being in charge", bm:"Terus menyukarela — anda suka mengetuai"}, d:"v"},
+    {t:{en:"Volunteer if it could open doors to something bigger later", bm:"Menyukarela kalau ia boleh buka peluang lebih besar nanti"}, d:"h"},
+    {t:{en:"Ask for the scope and details before deciding", bm:"Tanya skop dan butiran dahulu sebelum putuskan"}, d:"s"},
+    {t:{en:"Volunteer mainly to help a teammate who's overloaded", bm:"Menyukarela terutamanya untuk bantu rakan sekerja yang tertekan"}, d:"e"},
+  ]},
+{ q:{en:"You've saved up RM3,000. Your first thought is…",
+     bm:"Anda berjaya simpan RM3,000. Fikiran pertama anda ialah…"},
+  opts:[
+    {t:{en:"\"Time to start a small side business\"", bm:"\"Masa untuk mula perniagaan sampingan\""}, d:"h"},
+    {t:{en:"\"Put it in ASB or fixed deposit — safety first\"", bm:"\"Letak dalam ASB atau simpanan tetap — keselamatan dulu\""}, d:"s"},
+    {t:{en:"\"Upgrade my tools or equipment for my trade\"", bm:"\"Naik taraf alat atau kelengkapan untuk kerja saya\""}, d:"c"},
+    {t:{en:"\"Invest in something creative — camera, craft supplies\"", bm:"\"Labur untuk sesuatu yang kreatif — kamera, bahan kraf\""}, d:"x"},
+  ]},
+{ q:{en:"Family asks you to plan the Raya/CNY open house budget. You…",
+     bm:"Keluarga minta anda uruskan bajet rumah terbuka Raya/CNY. Anda…"},
+  opts:[
+    {t:{en:"Make a detailed spreadsheet of every expense", bm:"Buat spreadsheet terperinci untuk semua perbelanjaan"}, d:"s"},
+    {t:{en:"Make sure everyone feels welcomed, even on a small budget", bm:"Pastikan semua rasa dijemput walau bajet kecil"}, d:"e"},
+    {t:{en:"Find fun, low-cost DIY ways to make it feel festive", bm:"Cari cara DIY murah untuk suasana lebih meriah"}, d:"x"},
+    {t:{en:"Sell some kuih or find a sponsor to cover the cost", bm:"Jual kuih atau cari penaja untuk tampung kos"}, d:"h"},
+  ]},
+{ q:{en:"Your supervisor goes on leave and things fall on you for a week. You…",
+     bm:"Penyelia anda bercuti dan segalanya jatuh ke bahu anda seminggu. Anda…"},
+  opts:[
+    {t:{en:"Naturally step up and start making the calls", bm:"Secara semula jadi tampil dan buat keputusan"}, d:"v"},
+    {t:{en:"Make sure the usual processes still run on schedule", bm:"Pastikan proses biasa terus berjalan mengikut jadual"}, d:"s"},
+    {t:{en:"Just put in extra hours to keep everything moving", bm:"Kerja lebih masa untuk pastikan semuanya berjalan"}, d:"h"},
+    {t:{en:"Check in with the team so no one feels overwhelmed", bm:"Bertanya khabar rakan sepasukan supaya tak rasa tertekan"}, d:"e"},
+  ]},
+{ q:{en:"A friend asks you to help fix something broken at their house. You…",
+     bm:"Kawan minta bantuan baiki sesuatu yang rosak di rumah mereka. Anda…"},
+  opts:[
+    {t:{en:"Get excited figuring out how it works and fixing it properly", bm:"Teruja untuk fahami cara ia berfungsi dan baiki dengan betul"}, d:"c"},
+    {t:{en:"Go because they need help — the fixing is secondary", bm:"Pergi kerana mereka perlukan bantuan — baiki itu perkara kedua"}, d:"e"},
+    {t:{en:"Go, and low-key wonder if this could become a side income", bm:"Pergi, dan diam-diam fikir kalau ini boleh jadi pendapatan sampingan"}, d:"h"},
+    {t:{en:"Make a checklist and diagnose it systematically first", bm:"Buat senarai semak dan kenal pasti masalah secara sistematik dahulu"}, d:"s"},
+  ]},
+{ q:{en:"You're asked to train a new hire at work. You…",
+     bm:"Anda diminta melatih pekerja baru. Anda…"},
+  opts:[
+    {t:{en:"Go patient and one-on-one so they feel supported", bm:"Bersabar dan bimbing secara individu supaya mereka rasa disokong"}, d:"e"},
+    {t:{en:"Focus on getting them to see the big picture fast", bm:"Fokus supaya mereka cepat faham gambaran besar"}, d:"v"},
+    {t:{en:"Use fun examples and analogies to make it stick", bm:"Guna contoh dan analogi menarik supaya mudah diingati"}, d:"x"},
+    {t:{en:"Give them a clear step-by-step manual to follow", bm:"Berikan manual langkah demi langkah yang jelas"}, d:"s"},
+  ]},
+{ q:{en:"A rare free Saturday, no obligations. You…",
+     bm:"Hari Sabtu yang bebas tanpa sebarang tanggungjawab. Anda…"},
+  opts:[
+    {t:{en:"Use it to earn a bit extra — side gig, extra shift", bm:"Gunakan untuk cari pendapatan tambahan — kerja sampingan, shift tambahan"}, d:"h"},
+    {t:{en:"Fix or tinker with something around the house", bm:"Membaiki atau mengubah suai sesuatu di rumah"}, d:"c"},
+    {t:{en:"Work on a personal creative project or hobby", bm:"Buat projek kreatif atau hobi peribadi"}, d:"x"},
+    {t:{en:"Spend it with family or the community", bm:"Luangkan masa bersama keluarga atau komuniti"}, d:"e"},
+  ]},
+{ q:{en:"A new bonus scheme rewards the whole team, not individuals. You…",
+     bm:"Skim bonus baru memberi ganjaran kepada seluruh pasukan, bukan individu. Anda…"},
+  opts:[
+    {t:{en:"Rally everyone around a shared target", bm:"Menggerakkan semua orang ke arah sasaran bersama"}, d:"v"},
+    {t:{en:"Make sure quieter teammates get support and credit too", bm:"Pastikan rakan sepasukan yang pendiam turut disokong dan diberi kredit"}, d:"e"},
+    {t:{en:"Set up a simple tracker so everyone knows where they stand", bm:"Bina penjejak mudah supaya semua tahu kedudukan masing-masing"}, d:"s"},
+    {t:{en:"Personally push harder to cover any gaps", bm:"Berusaha lebih gigih secara peribadi untuk tampung kelompangan"}, d:"h"},
+  ]},
+{ q:{en:"You see a viral local business making good money online. You think about…",
+     bm:"Anda nampak perniagaan tempatan viral yang untung besar. Anda terfikir tentang…"},
+  opts:[
+    {t:{en:"How you'd put your own creative spin on it", bm:"Bagaimana nak beri sentuhan kreatif tersendiri"}, d:"x"},
+    {t:{en:"How fast you could start something similar", bm:"Betapa cepat anda boleh mulakan sesuatu yang serupa"}, d:"h"},
+    {t:{en:"The actual business plan and numbers behind it", bm:"Pelan perniagaan dan angka sebenar di sebaliknya"}, d:"s"},
+    {t:{en:"Whether you could make the product better with your own hands", bm:"Sama ada anda boleh buat produk lebih baik dengan tangan sendiri"}, d:"c"},
+  ]},
+{ q:{en:"Your industry is hit by layoffs. You…",
+     bm:"Industri anda terkena gelombang pemberhentian kerja. Anda…"},
+  opts:[
+    {t:{en:"Immediately start hustling — freelance, gig work, anything", bm:"Terus bertindak cari kerja — freelance, gig, apa sahaja"}, d:"h"},
+    {t:{en:"Sit down and calculate your savings runway carefully", bm:"Duduk dan kira dengan teliti berapa lama simpanan boleh bertahan"}, d:"s"},
+    {t:{en:"Check on colleagues who got hit harder than you", bm:"Bertanya khabar rakan sekerja yang lebih terkesan"}, d:"e"},
+    {t:{en:"Start mapping out a new direction or industry to pivot into", bm:"Mula merancang arah atau industri baru untuk dituju"}, d:"v"},
+  ]},
+{ q:{en:"Your kids or younger siblings ask why studying even matters. You explain by…",
+     bm:"Anak atau adik anda tanya kenapa belajar itu penting. Anda terangkan dengan…"},
+  opts:[
+    {t:{en:"Talking about taking care of the people they love", bm:"Bercakap tentang menjaga orang yang mereka sayangi"}, d:"e"},
+    {t:{en:"Talking about the future and doors it opens", bm:"Bercakap tentang masa depan dan peluang yang terbuka"}, d:"v"},
+    {t:{en:"Turning it into a fun story they'll remember", bm:"Menjadikannya cerita menarik yang mereka akan ingat"}, d:"x"},
+    {t:{en:"Explaining it practically — steps, grades, what leads to what", bm:"Menerangkan secara praktikal — langkah, gred, apa membawa ke apa"}, d:"s"},
+  ]},
+{ q:{en:"A community WhatsApp group needs someone to organise a food-bank drive. You'd be the one who…",
+     bm:"Group WhatsApp komuniti perlukan seseorang untuk uruskan tabung makanan. Anda akan menjadi orang yang…"},
+  opts:[
+    {t:{en:"Happily takes the lead and becomes the face of it", bm:"Sanggup mengetuai dan menjadi wajah program ini"}, d:"v"},
+    {t:{en:"Handles the logistics — lists, schedules, drop-off points", bm:"Menguruskan logistik — senarai, jadual, titik penghantaran"}, d:"s"},
+    {t:{en:"Checks in on who needs help the most", bm:"Bertanya siapa yang paling perlukan bantuan"}, d:"e"},
+    {t:{en:"Goes out hustling for donations and sponsors", bm:"Turun padang mencari derma dan penaja"}, d:"h"},
+  ]},
+{ q:{en:"A rare day off after a long stretch of work. You…",
+     bm:"Cuti yang jarang berlaku selepas bekerja tanpa henti. Anda…"},
+  opts:[
+    {t:{en:"Do something purely for fun and self-expression", bm:"Buat sesuatu semata-mata untuk keseronokan dan ekspresi diri"}, d:"x"},
+    {t:{en:"Fix or improve something around the house", bm:"Membaiki atau menambah baik sesuatu di rumah"}, d:"c"},
+    {t:{en:"Properly catch up with people you love", bm:"Meluangkan masa sepenuhnya dengan orang tersayang"}, d:"e"},
+    {t:{en:"Get organised — bills, planning, admin catch-up", bm:"Menyusun hal — bil, perancangan, urusan tertangguh"}, d:"s"},
+  ]},
+{ q:{en:"If you could get free training in anything right now, what pulls you most?",
+     bm:"Jika anda boleh dapat latihan percuma sekarang, apa yang paling menarik minat anda?"},
+  opts:[
+    {t:{en:"A hands-on technical or trade skill", bm:"Kemahiran teknikal atau vokasional yang praktikal"}, d:"c"},
+    {t:{en:"A business or leadership skill", bm:"Kemahiran perniagaan atau kepimpinan"}, d:"v"},
+    {t:{en:"A counselling or people-care skill", bm:"Kemahiran kaunseling atau penjagaan orang"}, d:"e"},
+    {t:{en:"A creative or design skill", bm:"Kemahiran kreatif atau reka bentuk"}, d:"x"},
+  ]},
+];
+
+// simple line-icon paths (stroke-based, 24x24 viewBox)
+const ICONS = {
+  fighter:'<path d="M6 21l6-6M13 4l7 7-3 3-7-7 3-3z" /><path d="M3 14l3 3M9 8l3 3" />',
+  explorer:'<circle cx="12" cy="12" r="9"/><path d="M14.5 9.5L16 8l-1.5 4.5L10 14l1.5-4.5z"/>',
+  craftsman:'<path d="M14 7l3-3 3 3-3 3M3 21l6-6M8.5 15.5l-3-3L14 4l3 3z"/>',
+  analyst:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M8 8h5M8 16h4"/>',
+  artisan:'<path d="M12 3v4M5 8l3 2M19 8l-3 2M6 21c0-4 3-6 6-6s6 2 6 6"/><circle cx="12" cy="10" r="2"/>',
+  planner:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M9 14l2 2 4-4"/>',
+  guardian:'<path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/>',
+  connector:'<circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2-5 5-5s5 2 5 5M12 20c0-3 2-5 5-5s5 2 5 5"/>',
+  mentor:'<path d="M4 6h11v10H4z"/><path d="M15 9l5-2v9l-5-2"/>',
+  leader:'<path d="M4 20l1-9 3 2 4-6 4 6 3-2 1 9z"/>',
+};
+
+// JEJAK's own strength-code system, like MBTI's letters — each dimension
+// gets a single letter, and every type's code is its top two dimensions.
+const LETTERS = { h:"J", e:"P", c:"T", v:"W", x:"K", s:"S" };
+const LETTER_NAME = {
+  J:{en:"Juang (Hustle)", bm:"Juang"},
+  P:{en:"Peduli (Empathy)", bm:"Peduli"},
+  T:{en:"Tangan (Craft)", bm:"Tangan"},
+  W:{en:"Wawasan (Vision)", bm:"Wawasan"},
+  K:{en:"Kreatif (Creativity)", bm:"Kreatif"},
+  S:{en:"Struktur (Structure)", bm:"Struktur"},
+};
+function topDims(type){
+  return Object.entries(type.v).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+}
+function typeCode(type){
+  const [p1,p2] = topDims(type);
+  return LETTERS[p1]+LETTERS[p2];
+}
+function typeCodeLabel(type){
+  const [p1,p2] = topDims(type);
+  const l1 = LETTERS[p1], l2 = LETTERS[p2];
+  return { en:`${LETTER_NAME[l1].en} + ${LETTER_NAME[l2].en}`, bm:`${LETTER_NAME[l1].bm} + ${LETTER_NAME[l2].bm}` };
+}
+
+const TYPES = [
+{
+  id:"pejuang", icon:"fighter", color:"var(--red)",
+  name:{en:"The Fighter", bm:"Pejuang"},
+  tagline:{en:"You don't wait for things to get easier — you make a way, even when the path isn't clear yet.",
+           bm:"Anda tak tunggu keadaan jadi senang — anda cari jalan sendiri, walaupun belum jelas."},
+  desc:{en:"You're built for pressure. When money's tight or the plan falls apart, you're the one already moving — picking up extra shifts, starting a side hustle, finding an angle nobody else saw. What makes you a Pejuang isn't just hard work, it's that you pair the hustle with a sense of where you're headed. You're not grinding aimlessly; every gig, every risk, is a step toward something bigger for you and your family. The risk for a Pejuang is burnout — you push so hard for others that you forget to build for yourself too.",
+           bm:"Anda dibina untuk tekanan. Bila duit tak cukup atau rancangan tak menjadi, anda yang dah bergerak dulu — ambil shift tambahan, mula side hustle, cari peluang yang orang lain tak nampak. Yang menjadikan anda seorang Pejuang bukan sekadar kerja keras, tapi anda gabungkan semangat juang dengan hala tuju yang jelas. Setiap gig, setiap risiko, adalah langkah ke arah sesuatu yang lebih besar untuk anda dan keluarga. Risiko seorang Pejuang ialah keletihan — anda berjuang sangat kuat untuk orang lain sampai lupa nak bina untuk diri sendiri juga."},
+  strengths:{en:["Turns setbacks into fast action","Comfortable taking calculated risks","Finds income where others see dead ends","Rallies people around a bigger goal"],
+             bm:["Mengubah kemunduran menjadi tindakan pantas","Selesa mengambil risiko yang dikira","Cari peluang pendapatan di tempat orang lain nampak jalan buntu","Menggerakkan orang ke arah matlamat lebih besar"]},
+  careers:{en:["Delivery/ride-hailing entrepreneur (fleet owner)","Small business owner (kedai runcit, warung)","Direct sales / agency leader","Construction subcontractor","Franchise operator","Insurance or takaful agent","Real estate negotiator"],
+           bm:["Usahawan penghantaran/e-hailing (pemilik armada)","Pemilik perniagaan kecil (kedai runcit, warung)","Ketua jualan langsung / agensi","Sub-kontraktor pembinaan","Pengendali francais","Ejen insurans atau takaful","Perunding hartanah"]},
+  celebs:[
+    {name:"Tony Fernandes", note:{en:"Turned a near-bankrupt airline into AirAsia through sheer relentlessness — the definition of Pejuang energy.", bm:"Mengubah syarikat penerbangan yang hampir muflis menjadi AirAsia dengan semangat juang yang tak pernah padam."}},
+    {name:"Vincent Tan", note:{en:"Built the Berjaya conglomerate from the ground up across countless industries.", bm:"Membina kumpulan Berjaya dari bawah merentasi pelbagai industri."}},
+    {name:"Neelofa", note:{en:"Grew from TV host to a full business empire in fashion and beauty.", bm:"Berkembang dari pengacara TV kepada empayar perniagaan fesyen dan kecantikan."}},
+    {name:"Dwayne \u201cThe Rock\u201d Johnson", note:{en:"Went from having $7 in his pocket to building a global entertainment and business career.", bm:"Bermula dengan hanya $7 di poket sehingga membina kerjaya hiburan dan perniagaan global."}},
+    {name:"Rihanna", note:{en:"Built Fenty into a beauty empire by refusing to settle for the industry's limits.", bm:"Membina Fenty menjadi empayar kecantikan dengan menolak had yang ditetapkan industri."}},
+  ],
+  v:{h:3,e:0.5,c:0.5,v:2,x:0.5,s:0.5}
+},
+{
+  id:"peneroka", icon:"explorer", color:"var(--gold-deep)",
+  name:{en:"The Explorer", bm:"Peneroka"},
+  tagline:{en:"You don't just hustle — you hustle in new directions, mixing income streams and ideas nobody's tried yet.",
+           bm:"Anda bukan sekadar berusaha — anda berusaha dengan cara baharu, gabungkan pelbagai sumber pendapatan dan idea yang orang lain belum cuba."},
+  desc:{en:"You get restless doing just one thing. Where a Pejuang doubles down on one hustle, you're the type who's running a small shop, posting content, and trying a new recipe for weekend orders, all at once. Your gift is spotting a trend before it's obvious and adapting fast enough to ride it. You're comfortable with uncertainty in a way most people aren't — a new platform, a new product, a new market doesn't scare you, it excites you. The challenge is following through: you may need a partner or a plan to help you finish what you start.",
+           bm:"Anda mudah gelisah kalau hanya buat satu perkara. Kalau seorang Pejuang fokus pada satu hustle, anda pula jenis yang jalankan kedai kecil, buat kandungan media sosial, dan cuba resipi baru untuk tempahan hujung minggu — semua serentak. Kelebihan anda ialah dapat kesan trend sebelum ia jadi arus perdana dan cepat menyesuaikan diri. Anda selesa dengan ketidakpastian dengan cara yang ramai orang tak selesa — platform baru, produk baru, pasaran baru bukan menakutkan, malah mengujakan. Cabarannya ialah untuk selesaikan apa yang dimulakan — mungkin anda perlukan rakan kongsi atau rancangan untuk bantu anda habiskan projek."},
+  strengths:{en:["Spots trends and opportunities early","Adapts fast to new platforms and tools","Comfortable mixing multiple income streams","Brings fresh, original ideas to old problems"],
+             bm:["Cepat mengesan trend dan peluang","Cekap menyesuaikan diri dengan platform dan alat baharu","Selesa menggabungkan pelbagai sumber pendapatan","Membawa idea segar untuk masalah lama"]},
+  careers:{en:["Live-commerce seller / content creator","Social media marketer","Freelance video or graphic editor","Homestay or tour operator","Event/wedding vendor (photography, catering)","Online reseller or dropshipper","Digital marketing consultant"],
+           bm:["Penjual live commerce / pencipta kandungan","Pemasar media sosial","Editor video/grafik bebas","Pengendali homestay atau pelancongan","Vendor majlis (fotografi, katering)","Peniaga online / dropshipper","Perunding pemasaran digital"]},
+  celebs:[
+    {name:"Khairul Aming", note:{en:"Turned a viral homemade sambal video into a full retail business almost overnight.", bm:"Mengubah video sambal buatan sendiri yang viral menjadi perniagaan runcit yang besar dalam masa singkat."}},
+    {name:"Vivy Yusof", note:{en:"Built fzmovement, dUCk, and fashion e-commerce ventures by constantly testing new ideas.", bm:"Membina fzmovement, dUCk, dan perniagaan e-dagang fesyen dengan sentiasa menguji idea baharu."}},
+    {name:"Nigel Ng (Uncle Roger)", note:{en:"Took a single comedy character and expanded it into a global touring and content career.", bm:"Mengembangkan satu karakter komedi menjadi kerjaya lawatan dan kandungan global."}},
+    {name:"MrBeast", note:{en:"Constantly reinvents his content format, chasing whatever idea works next.", bm:"Sentiasa mencipta semula format kandungannya, mengejar idea baharu yang berkesan."}},
+    {name:"Emma Chamberlain", note:{en:"Moved from vlogging into coffee, fashion, and media without losing her original voice.", bm:"Berpindah dari vlog kepada perniagaan kopi, fesyen, dan media tanpa kehilangan suara asalnya."}},
+  ],
+  v:{h:3,e:0.5,c:0.5,v:0.5,x:2,s:0.5}
+},
+{
+  id:"tukang", icon:"craftsman", color:"var(--brown-deep)",
+  name:{en:"The Craftsman", bm:"Tukang"},
+  tagline:{en:"Give you a broken thing and time, and you'll hand it back better than it was before.",
+           bm:"Berikan anda barang rosak dan sedikit masa, anda akan pulangkan ia lebih baik daripada asal."},
+  desc:{en:"You think with your hands. You're the one people call when the fan won't spin, the pipe leaks, or the wiring's acting up — not because you studied it in a classroom, but because you actually understand how things work. Craft, for you, isn't a hobby, it's identity: doing a job properly matters more to you than doing it fast. Paired with your hustle, you're also not afraid to go find the next job yourself rather than wait for one to come to you. The risk is undervaluing your own skill — many Tukang types charge too little for work that took real expertise to do well.",
+           bm:"Anda berfikir dengan tangan. Anda yang dipanggil bila kipas tak berpusing, paip bocor, atau wayar bermasalah — bukan kerana belajar di kelas, tapi kerana anda benar-benar faham cara sesuatu berfungsi. Kemahiran tangan bagi anda bukan sekadar hobi, ia identiti — buat kerja dengan betul lebih penting daripada buat kerja dengan cepat. Digabungkan dengan semangat juang, anda juga tak segan mencari kerja sendiri dan tak tunggu ia datang. Risikonya ialah anda mungkin memandang rendah kemahiran sendiri — ramai Tukang caj terlalu murah untuk kerja yang sebenarnya memerlukan kepakaran tinggi."},
+  strengths:{en:["Understands how physical systems actually work","High standards for quality of finished work","Learns new technical skills quickly, often self-taught","Resourceful — fixes things with what's on hand"],
+             bm:["Faham cara sistem fizikal sebenarnya berfungsi","Standard tinggi untuk kualiti kerja siap","Cepat belajar kemahiran teknikal baharu, selalunya belajar sendiri","Bijak menggunakan apa yang ada untuk selesaikan masalah"]},
+  careers:{en:["Electrician","Air-conditioning / auto technician","Plumber","Welder","Renovation contractor","Solar panel installer","Machine operator / maintenance technician"],
+           bm:["Juruelektrik","Juruteknik penyaman udara / automotif","Tukang paip","Tukang kimpal","Kontraktor renovasi","Pemasang panel solar","Operator/juruteknik penyelenggaraan mesin"]},
+  celebs:[
+    {name:"Datuk Nicol David", note:{en:"Eight-time world squash champion known for the sheer precision and discipline of her game.", bm:"Juara skuasy dunia lapan kali yang terkenal dengan ketepatan dan disiplin permainannya."}},
+    {name:"Datuk Lee Chong Wei", note:{en:"Built his career on relentless technical drilling and mastery of the smallest details.", bm:"Membina kerjaya dengan latihan teknikal yang tak kenal penat dan penguasaan setiap perincian kecil."}},
+    {name:"Datuk Jimmy Choo", note:{en:"Learned shoemaking as a hands-on craft before turning it into a global label.", bm:"Belajar membuat kasut sebagai kraf tangan sebelum mengembangkannya menjadi jenama global."}},
+    {name:"Bear Grylls", note:{en:"Built an entire career around practical, hands-on problem-solving skills.", bm:"Membina keseluruhan kerjaya berdasarkan kemahiran praktikal menyelesaikan masalah."}},
+    {name:"LeBron James", note:{en:"Known for treating his physical craft with an almost obsessive attention to maintenance and detail.", bm:"Terkenal dengan perhatian yang tinggi terhadap penyelenggaraan dan perincian dalam kerjayanya."}},
+  ],
+  v:{h:2,e:0.5,c:3,v:0.5,x:0.5,s:0.5}
+},
+{
+  id:"analisis", icon:"analyst", color:"var(--green-deep)",
+  name:{en:"The Analyst", bm:"Penganalisis"},
+  tagline:{en:"You catch the mistake nobody else noticed — because you actually check.",
+           bm:"Anda perasan kesilapan yang orang lain terlepas pandang — kerana anda memang menyemak."},
+  desc:{en:"You bring order to chaos. Where others eyeball it, you count it, check it twice, and write it down properly. This isn't about being rigid for its own sake — it's that you genuinely believe things go smoother when there's a system, and you're usually right. You thrive in roles where precision actually matters: inventory that must balance, accounts that must reconcile, quality that must pass. Pair this with a bit of hands-on skill and you become the person who not only spots the problem but knows exactly how to fix it. Your growth edge is flexibility — sometimes good enough today beats perfect next week.",
+           bm:"Anda membawa keteraturan dalam kekecohan. Kalau orang lain anggar sahaja, anda kira, semak dua kali, dan catat dengan betul. Ini bukan tentang kaku semata-mata — anda memang percaya kerja jadi lebih lancar dengan sistem yang betul, dan selalunya anda betul. Anda berkembang maju dalam peranan yang memerlukan ketepatan sebenar: inventori yang perlu seimbang, akaun yang perlu selaras, kualiti yang perlu lulus pemeriksaan. Gabungkan ini dengan sedikit kemahiran tangan, dan anda jadi orang yang bukan sahaja kesan masalah, tapi tahu cara betul untuk baikinya. Ruang untuk berkembang ialah fleksibiliti — kadangkala cukup baik hari ini lebih baik daripada sempurna minggu depan."},
+  strengths:{en:["Notices errors and inconsistencies others miss","Builds reliable systems and checklists","Follows through on detail without losing patience","Trusted to handle sensitive numbers and records"],
+             bm:["Perasan kesilapan dan ketidaktekalan yang orang lain terlepas","Membina sistem dan senarai semak yang boleh dipercayai","Teliti dalam perincian tanpa hilang kesabaran","Dipercayai untuk uruskan data dan rekod sensitif"]},
+  careers:{en:["Bookkeeper / accounts clerk","Quality control inspector","IT support technician","Warehouse / inventory coordinator","Payroll clerk","Lab or clinical technician","Audit assistant"],
+           bm:["Kerani akaun / pembukuan","Pemeriksa kawalan kualiti","Juruteknik sokongan IT","Penyelaras inventori/gudang","Kerani penggajian","Juruteknik makmal/klinikal","Pembantu audit"]},
+  celebs:[
+    {name:"Tan Sri Dr. Zeti Akhtar Aziz", note:{en:"Guided Malaysia's central bank through crises with a reputation for meticulous, data-driven decisions.", bm:"Menerajui Bank Negara Malaysia melalui pelbagai krisis dengan reputasi keputusan yang teliti dan berasaskan data."}},
+    {name:"Dr. Adeeba Kamarulzaman", note:{en:"Built her career on rigorous clinical research into infectious disease.", bm:"Membina kerjaya atas asas penyelidikan klinikal yang teliti dalam bidang penyakit berjangkit."}},
+    {name:"Marina Mahathir", note:{en:"Known for carefully researched, detail-grounded advocacy writing.", bm:"Terkenal dengan penulisan advokasi yang berasaskan penyelidikan dan perincian yang teliti."}},
+    {name:"Bill Gates", note:{en:"Built Microsoft on an obsessive, systems-first approach to solving problems.", bm:"Membina Microsoft dengan pendekatan berasaskan sistem yang sangat teliti dalam menyelesaikan masalah."}},
+    {name:"Marie Kondo", note:{en:"Turned a structured, methodical approach to organising into a global career.", bm:"Mengubah pendekatan penyusunan yang sistematik menjadi kerjaya global."}},
+  ],
+  v:{h:0.5,e:0.5,c:2,v:0.5,x:0.5,s:3}
+},
+{
+  id:"artisan", icon:"artisan", color:"var(--red)",
+  name:{en:"The Creator", bm:"Artisan"},
+  tagline:{en:"You need to make things — and you need them to look and feel right, not just work.",
+           bm:"Anda perlu mencipta sesuatu — dan ia perlu nampak serta terasa betul, bukan sekadar berfungsi."},
+  desc:{en:"You have an eye for it. Whether it's a plate of food, a piece of clothing, a photo, or a handmade craft, you notice what makes something beautiful and you can't help but try to make your own version even better. Unlike a purely creative dreamer, you're grounded in the actual making — you know your materials, your tools, your medium, deeply. This combination of taste and hands-on skill is rare and valuable, especially as more people pay for things that feel personal and well-made rather than mass-produced. Your challenge is often business-side: pricing your work fairly and getting it in front of the right customers.",
+           bm:"Anda mempunyai daya cita rasa yang tajam. Sama ada sepinggan makanan, sehelai pakaian, sekeping foto, atau kraf tangan, anda perasan apa yang buat sesuatu itu cantik, dan anda tak dapat tahan untuk cuba buat versi anda sendiri lebih baik. Berbeza dengan orang kreatif yang hanya berangan, anda membumi dalam proses membuat sebenar — anda kenal bahan, alat, dan medium anda dengan mendalam. Gabungan cita rasa dan kemahiran tangan ini jarang ditemui dan amat bernilai, terutamanya kini ramai sanggup bayar untuk sesuatu yang terasa peribadi dan dibuat dengan teliti berbanding pengeluaran besar-besaran. Cabaran anda selalunya di bahagian perniagaan — menetapkan harga yang adil dan mencari pelanggan yang tepat."},
+  strengths:{en:["Strong eye for aesthetics and finished quality","Deep hands-on mastery of a chosen medium","Turns ordinary materials into something distinctive","Takes pride in work that carries a personal signature"],
+             bm:["Cita rasa estetik yang kuat dan mementingkan kualiti siap","Penguasaan mendalam dalam medium pilihan","Mengubah bahan biasa menjadi sesuatu yang istimewa","Bangga dengan hasil kerja yang membawa ciri peribadi"]},
+  careers:{en:["Baker / pastry chef","Tailor or fashion designer","Furniture maker","Henna or nail artist","Graphic designer","Handicraft entrepreneur (batik, weaving)","Photographer"],
+           bm:["Tukang roti / koki pastri","Tukang jahit / pereka fesyen","Tukang perabot","Pelukis henna / juruhias kuku","Pereka grafik","Usahawan kraf tangan (batik, tenunan)","Jurugambar"]},
+  celebs:[
+    {name:"Yuna", note:{en:"Built a music career on a distinctive, self-shaped creative identity, later extending into fashion.", bm:"Membina kerjaya muzik dengan identiti kreatif yang tersendiri, kemudian melebarkan sayap ke fesyen."}},
+    {name:"Zang Toi", note:{en:"Became an internationally recognised fashion designer known for precise, elegant craftsmanship.", bm:"Menjadi pereka fesyen terkenal di peringkat antarabangsa dengan kraftsmanship yang tepat dan anggun."}},
+    {name:"Chef Wan", note:{en:"Turned deep culinary craft and a distinctive personal style into a lifelong career.", bm:"Mengubah kemahiran memasak yang mendalam dan gaya peribadi yang unik menjadi kerjaya sepanjang hayat."}},
+    {name:"Pharrell Williams", note:{en:"Moves fluidly across music, fashion, and design while staying hands-on in the craft.", bm:"Bergerak lancar merentasi muzik, fesyen, dan reka bentuk sambil terus terlibat secara langsung dalam kraf."}},
+    {name:"Beyoncé", note:{en:"Known for obsessive, hands-on involvement in every creative detail of her work.", bm:"Terkenal dengan penglibatan langsung yang teliti dalam setiap perincian kreatif hasil kerjanya."}},
+  ],
+  v:{h:0.5,e:0.5,c:2,v:0.5,x:3,s:0.5}
+},
+{
+  id:"perancang", icon:"planner", color:"var(--green-deep)",
+  name:{en:"The Planner", bm:"Perancang"},
+  tagline:{en:"You see the whole timeline before anyone else has finished reading the brief.",
+           bm:"Anda sudah nampak keseluruhan garis masa sebelum orang lain habis baca taklimat."},
+  desc:{en:"You're the one who asks \"but what happens after that?\" while everyone else is excited about the idea itself. You naturally think in steps, sequences, and dependencies — and you can hold a big goal in your head while also tracking the dozens of small tasks it takes to get there. This makes you invaluable for anything with moving parts: events, projects, operations, budgets. You're not just organised for its own sake, you organise in service of a destination. The risk is that plans change fast in real life, and a Perancang can get frustrated when reality doesn't cooperate with the spreadsheet.",
+           bm:"Anda yang akan tanya \"lepas itu apa pula?\" ketika orang lain masih teruja dengan idea semata-mata. Anda secara semula jadi berfikir dalam bentuk langkah, urutan, dan kebergantungan — dan boleh simpan matlamat besar dalam kepala sambil menjejak berpuluh tugasan kecil untuk sampai ke sana. Ini menjadikan anda amat bernilai untuk apa-apa yang mempunyai banyak bahagian bergerak: majlis, projek, operasi, bajet. Anda bukan teratur semata-mata, tapi teratur demi mencapai satu destinasi. Risikonya ialah rancangan sering berubah dalam kehidupan sebenar, dan seorang Perancang kadangkala kecewa bila realiti tak selari dengan spreadsheet."},
+  strengths:{en:["Breaks big goals into clear, workable steps","Anticipates problems before they happen","Keeps projects on schedule and on budget","Balances the big picture with fine detail"],
+             bm:["Memecahkan matlamat besar kepada langkah yang jelas dan boleh laksana","Menjangka masalah sebelum ia berlaku","Memastikan projek mengikut jadual dan bajet","Mengimbangi gambaran besar dengan perincian halus"]},
+  careers:{en:["Admin executive","Procurement officer","Event planner / coordinator","Logistics or operations planner","Project coordinator","Office manager","Supply chain assistant"],
+           bm:["Eksekutif pentadbiran","Pegawai perolehan","Perancang / penyelaras majlis","Perancang logistik atau operasi","Penyelaras projek","Pengurus pejabat","Pembantu rantaian bekalan"]},
+  celebs:[
+    {name:"Tan Sri Syed Mokhtar Al-Bukhary", note:{en:"Built a sprawling business empire through careful, long-term strategic planning.", bm:"Membina empayar perniagaan yang luas melalui perancangan strategik jangka panjang yang teliti."}},
+    {name:"Michelle Yeoh", note:{en:"Built a decades-long global career through deliberate, well-planned career choices.", bm:"Membina kerjaya global sepanjang berdekad melalui pilihan kerjaya yang dirancang dengan teliti."}},
+    {name:"Afdlin Shauki", note:{en:"Manages acting, directing, and producing simultaneously — a role that demands serious planning.", bm:"Menguruskan lakonan, pengarahan, dan penerbitan serentak — peranan yang menuntut perancangan yang serius."}},
+    {name:"Steve Jobs", note:{en:"Known for obsessively planning every detail of a product launch, sometimes years ahead.", bm:"Terkenal kerana merancang setiap perincian pelancaran produk dengan teliti, kadangkala bertahun sebelumnya."}},
+    {name:"Oprah Winfrey", note:{en:"Built a media empire through deliberate long-term brand and business planning.", bm:"Membina empayar media melalui perancangan jenama dan perniagaan jangka panjang yang teliti."}},
+  ],
+  v:{h:0.5,e:0.5,c:0.5,v:2,x:0.5,s:3}
+},
+{
+  id:"penjaga", icon:"guardian", color:"var(--gold-deep)",
+  name:{en:"The Guardian", bm:"Penjaga"},
+  tagline:{en:"People relax when you're around, because they know you'll actually follow through.",
+           bm:"Orang berasa tenang bila ada anda, kerana mereka tahu anda pasti akan tunaikan janji."},
+  desc:{en:"You care in a reliable way — not just warm words, but showing up consistently, remembering the small things, following through on what you said you'd do. This combination of genuine empathy and dependability makes you the person others lean on during hard times: the one who checks on the elderly neighbour, keeps track of the kids' medicine schedule, remembers everyone's birthday. In a workplace, this translates directly into roles built on trust and consistency, especially caregiving and community-facing work. Your challenge is boundaries — Penjaga types often give until they're running on empty.",
+           bm:"Anda mengambil berat dengan cara yang boleh dipercayai — bukan sekadar kata-kata manis, tapi hadir secara konsisten, ingat perkara kecil, dan tunaikan apa yang dijanjikan. Gabungan empati sebenar dan kebolehpercayaan ini menjadikan anda tempat orang lain bersandar ketika susah: yang bertanya khabar jiran warga emas, ingat jadual ubat anak-anak, ingat hari lahir semua orang. Di tempat kerja, ini diterjemahkan terus kepada peranan yang dibina atas kepercayaan dan konsistensi, terutamanya kerja penjagaan dan komuniti. Cabaran anda ialah sempadan diri — Penjaga sering memberi sehingga tenaga sendiri habis."},
+  strengths:{en:["Builds deep, lasting trust with people","Remembers and acts on small but important details","Stays calm and steady during other people's crises","Shows up consistently, not just when convenient"],
+             bm:["Membina kepercayaan yang mendalam dan berkekalan","Ingat dan bertindak atas perincian kecil yang penting","Kekal tenang dan stabil semasa krisis orang lain","Sentiasa hadir secara konsisten, bukan bila senang sahaja"]},
+  careers:{en:["Nurse / healthcare assistant","Childcare or nursery worker","Eldercare provider","Community health volunteer","School co-op / canteen manager","Hospital ward clerk","Case worker / welfare officer"],
+           bm:["Jururawat / pembantu kesihatan","Pekerja taska/tadika","Penjaga warga emas","Sukarelawan kesihatan komuniti","Pengurus koperasi/kantin sekolah","Kerani wad hospital","Pekerja kes / pegawai kebajikan"]},
+  celebs:[
+    {name:"Dato' Dr. Noor Hisham Abdullah", note:{en:"Became a trusted, steady public presence guiding the nation through the pandemic.", bm:"Menjadi tokoh awam yang dipercayai dan stabil dalam membimbing negara ketika pandemik."}},
+    {name:"Erra Fazira", note:{en:"Known for consistent charity work supporting families and children over many years.", bm:"Terkenal dengan kerja amal yang konsisten membantu keluarga dan kanak-kanak sekian lama."}},
+    {name:"Sheila Majid", note:{en:"Long respected for a warm, grounded public presence across decades of her career.", bm:"Lama dihormati kerana imej awam yang mesra dan membumi sepanjang kerjayanya."}},
+    {name:"Michelle Obama", note:{en:"Built her public work around consistent, community-focused care initiatives.", bm:"Membina kerja awamnya berasaskan inisiatif penjagaan komuniti yang konsisten."}},
+    {name:"Emma Watson", note:{en:"Known for steady, long-term commitment to the causes she publicly supports.", bm:"Terkenal kerana komitmen jangka panjang yang konsisten terhadap isu yang disokongnya secara terbuka."}},
+  ],
+  v:{h:0.5,e:3,c:0.5,v:0.5,x:0.5,s:2}
+},
+{
+  id:"perunding", icon:"connector", color:"var(--red)",
+  name:{en:"The Connector", bm:"Perunding"},
+  tagline:{en:"You can read a room in seconds — and you always know who needs to be talking to whom.",
+           bm:"Anda boleh baca keadaan dalam sekelip mata — dan sentiasa tahu siapa perlu bercakap dengan siapa."},
+  desc:{en:"People are your medium. You pick up on what someone actually needs, not just what they say, and you're constantly connecting dots between people, ideas, and opportunities. Unlike a purely empathetic caregiver, you pair that people-sense with vision — you don't just comfort people, you help move them somewhere. This is a rare and valuable combination in sales, community leadership, and any role built on relationships and trust rather than just process. Your challenge is that you can spread yourself thin trying to be everyone's bridge — remember you can't connect every dot yourself.",
+           bm:"Manusia adalah medium anda. Anda perasan apa yang seseorang benar-benar perlukan, bukan sekadar apa yang mereka katakan, dan sentiasa menghubungkan orang, idea, dan peluang. Berbeza dengan seorang penjaga yang empatik semata-mata, anda gabungkan naluri terhadap manusia ini dengan wawasan — anda bukan sekadar hiburkan orang, tapi bantu mereka bergerak ke suatu tempat. Ini gabungan yang jarang dan bernilai dalam jualan, kepimpinan komuniti, dan sebarang peranan berasaskan hubungan dan kepercayaan berbanding proses semata-mata. Cabaran anda ialah anda mungkin terlalu banyak menjadi jambatan untuk semua orang — ingat, anda tak perlu hubungkan setiap noktah sendirian."},
+  strengths:{en:["Reads people and situations quickly and accurately","Builds trust and rapport fast, even with strangers","Connects people to the right opportunities","Persuades through genuine understanding, not pressure"],
+             bm:["Membaca orang dan situasi dengan pantas dan tepat","Membina kepercayaan dan keakraban dengan pantas, walau dengan orang baru","Menghubungkan orang dengan peluang yang tepat","Meyakinkan melalui kefahaman sebenar, bukan tekanan"]},
+  careers:{en:["Sales executive","Real estate negotiator","Community leader (JKKK / RA)","Customer relationship officer","Insurance agent","Union or association representative","NGO programme coordinator"],
+           bm:["Eksekutif jualan","Perunding hartanah","Ketua komuniti (JKKK / RA)","Pegawai perhubungan pelanggan","Ejen insurans","Wakil kesatuan atau persatuan","Penyelaras program NGO"]},
+  celebs:[
+    {name:"Zizan Razak", note:{en:"Built a career on genuinely connecting with audiences across comedy, film, and hosting.", bm:"Membina kerjaya dengan hubungan tulen bersama penonton merentasi komedi, filem, dan pengacaraan."}},
+    {name:"Awal Ashaari", note:{en:"Moves easily between acting and hosting, known for an approachable, relatable public persona.", bm:"Mudah bergerak antara lakonan dan pengacaraan, terkenal dengan personaliti awam yang mesra dan mudah didekati."}},
+    {name:"Datuk Lat", note:{en:"Connected all of Malaysia through cartoons that captured shared, everyday experiences.", bm:"Menghubungkan seluruh Malaysia melalui kartun yang menggambarkan pengalaman harian bersama."}},
+    {name:"David Beckham", note:{en:"Transitioned from sport into a career built almost entirely on relationships and brand partnerships.", bm:"Beralih daripada sukan kepada kerjaya yang dibina hampir sepenuhnya atas hubungan dan kerjasama jenama."}},
+    {name:"Serena Williams", note:{en:"Built a business network and public following through strong personal connection with fans.", bm:"Membina rangkaian perniagaan dan pengikut awam melalui hubungan peribadi yang kuat dengan peminat."}},
+  ],
+  v:{h:0.5,e:3,c:0.5,v:2,x:0.5,s:0.5}
+},
+{
+  id:"pendidik", icon:"mentor", color:"var(--green-deep)",
+  name:{en:"The Mentor", bm:"Pendidik"},
+  tagline:{en:"You don't just explain things — you find the one way of explaining it that finally makes it click.",
+           bm:"Anda bukan sekadar terangkan sesuatu — anda cari cara yang akhirnya buat orang faham."},
+  desc:{en:"You have a gift for meeting people where they are. When someone's confused or struggling, you don't just repeat the instructions louder — you find a new analogy, a different example, a story that clicks for that specific person. This blend of genuine care and creative thinking makes you a natural teacher, whether or not that's your official job title. You probably already do this informally — the cousin who calls you for career advice, the junior colleague who quietly asks you instead of the manager. The challenge is recognising this as a real, monetisable skill rather than just something you do for free.",
+           bm:"Anda mempunyai bakat untuk memahami tahap orang lain. Bila seseorang keliru atau bergelut, anda tak sekadar ulang arahan dengan lebih kuat — anda cari analogi baharu, contoh berbeza, cerita yang benar-benar sesuai untuk orang itu. Gabungan sikap ambil berat yang tulen dan pemikiran kreatif ini menjadikan anda seorang guru semula jadi, walaupun bukan itu jawatan rasmi anda. Anda mungkin sudah buat ini secara tidak formal — sepupu yang telefon minta nasihat kerjaya, rakan sekerja junior yang diam-diam tanya anda dan bukan pengurus. Cabarannya ialah mengiktiraf ini sebagai kemahiran sebenar yang bernilai, bukan sekadar sesuatu yang anda buat secara percuma."},
+  strengths:{en:["Explains complex things in simple, memorable ways","Notices when someone is struggling before they say it","Adapts teaching style to the individual person","Builds confidence in people who doubt themselves"],
+             bm:["Menerangkan perkara rumit dengan cara mudah dan mudah diingati","Perasan bila seseorang bergelut sebelum mereka meluahkannya","Menyesuaikan gaya mengajar mengikut individu","Membina keyakinan dalam diri orang yang ragu-ragu terhadap diri sendiri"]},
+  careers:{en:["Tuition or vocational teacher","Kindergarten / preschool teacher","Corporate trainer","Youth programme facilitator","Librarian / community programme officer","Onboarding / training coordinator","Skills coach"],
+           bm:["Guru tuisyen atau vokasional","Guru tadika/prasekolah","Jurulatih korporat","Fasilitator program belia","Pustakawan / pegawai program komuniti","Penyelaras onboarding/latihan","Jurulatih kemahiran"]},
+  celebs:[
+    {name:"P. Ramlee", note:{en:"His work continues to teach and inspire generations of Malaysian filmmakers and performers.", bm:"Karyanya terus mendidik dan menginspirasikan generasi pembuat filem dan penghibur Malaysia."}},
+    {name:"Siti Nurhaliza", note:{en:"Regularly mentors newer singers on televised talent shows.", bm:"Kerap membimbing penyanyi baharu dalam rancangan pencarian bakat di televisyen."}},
+    {name:"Chef Ismail", note:{en:"Known for a warm, encouraging mentoring style while judging aspiring cooks.", bm:"Terkenal dengan gaya bimbingan yang mesra dan menyemangatkan ketika menilai bakal-bakal chef."}},
+    {name:"Malala Yousafzai", note:{en:"Built her entire public work around advocating for education and mentorship.", bm:"Membina seluruh kerja awamnya berdasarkan advokasi pendidikan dan bimbingan."}},
+    {name:"Jamie Oliver", note:{en:"Spent years teaching everyday people practical cooking skills through friendly, simple explanations.", bm:"Bertahun mengajar orang ramai kemahiran memasak praktikal melalui penerangan yang mesra dan mudah."}},
+  ],
+  v:{h:0.5,e:3,c:0.5,v:0.5,x:2,s:0.5}
+},
+{
+  id:"pemimpin", icon:"leader", color:"var(--brown-deep)",
+  name:{en:"The Leader", bm:"Pemimpin"},
+  tagline:{en:"You lead from the front, not the office — people follow you because you work as hard as they do.",
+           bm:"Anda memimpin dari barisan hadapan, bukan dari pejabat — orang ikut anda kerana anda bekerja seperti mereka juga."},
+  desc:{en:"You earn respect the hard way — by being in it with your team, not above them. When there's a tough shift, a difficult deadline, or a messy problem, you're not the one delegating from a distance, you're the one rolling up your sleeves alongside everyone else. This combination of hustle and genuine care for your people is what separates a real leader from someone who just has the title. People trust you because your actions and your words match. Your growth edge is learning to step back sometimes — a good Pemimpin also knows how to build others up to lead without you.",
+           bm:"Anda memperoleh hormat dengan cara yang sukar — dengan berada bersama pasukan, bukan di atas mereka. Bila ada shift yang berat, tarikh akhir yang mencabar, atau masalah yang rumit, anda bukan yang mengarah dari jauh, tapi turut turun tangan bersama semua orang. Gabungan semangat juang dan sikap ambil berat yang tulen terhadap pasukan inilah yang membezakan pemimpin sebenar daripada sekadar jawatan. Orang percaya kepada anda kerana tindakan dan kata-kata anda selari. Ruang untuk berkembang ialah belajar untuk sesekali mundur — Pemimpin yang baik juga tahu cara membina orang lain supaya boleh memimpin tanpa anda."},
+  strengths:{en:["Leads by example, not just instruction","Works alongside the team under pressure","Builds loyalty through consistency and fairness","Makes fast decisions when things get chaotic"],
+             bm:["Memimpin melalui teladan, bukan sekadar arahan","Bekerja bersama pasukan ketika tekanan","Membina kesetiaan melalui konsistensi dan keadilan","Membuat keputusan pantas ketika keadaan huru-hara"]},
+  careers:{en:["Production supervisor","Site foreman","Restaurant / outlet manager","Warehouse or factory team leader","Cooperative (koperasi) manager","Small business owner-operator","Shift manager"],
+           bm:["Penyelia pengeluaran","Ketua tapak (foreman)","Pengurus restoran / outlet","Ketua pasukan kilang/gudang","Pengurus koperasi","Pemilik-pengendali perniagaan kecil","Pengurus shift"]},
+  celebs:[
+    {name:"Cristiano Ronaldo", note:{en:"Known for leading teams through visible, relentless work ethic rather than words alone.", bm:"Terkenal memimpin pasukan melalui etika kerja yang jelas dan tak kenal penat, bukan sekadar kata-kata."}},
+    {name:"Datuk Lee Chong Wei", note:{en:"Carried the hopes of a nation as team captain through sheer discipline and presence.", bm:"Memikul harapan negara sebagai kapten pasukan melalui disiplin dan kehadiran yang tak berbelah bahagi."}},
+    {name:"Datuk Seri Nazir Razak", note:{en:"Known in the banking industry for a hands-on, people-first leadership style.", bm:"Dikenali dalam industri perbankan kerana gaya kepimpinan yang mengutamakan orang dan terlibat secara langsung."}},
+    {name:"Michelle Yeoh", note:{en:"Widely respected on set for leading with the same discipline she expects from her team.", bm:"Sangat dihormati di lokasi penggambaran kerana memimpin dengan disiplin yang sama dituntut daripada pasukannya."}},
+    {name:"Serena Williams", note:{en:"Built a reputation as a leader who pushed herself as hard as anyone she inspired.", bm:"Membina reputasi sebagai pemimpin yang mendorong diri sendiri sekuat mana pun dia menginspirasikan orang lain."}},
+  ],
+  v:{h:3,e:2,c:0.5,v:0.5,x:0.5,s:0.5}
+},
+];
+
+/* ============================= STATE ============================= */
+let state = {
+  lang: "bm",
+  screen: "start",
+  qIndex: 0,
+  scores: {h:0,e:0,c:0,v:0,x:0,s:0},
+};
+
+function computeResult(){
+  let best=null, bestScore=-Infinity, second=null, secondScore=-Infinity;
+  TYPES.forEach(t=>{
+    let dot = 0;
+    for(const k in t.v){ dot += (state.scores[k]||0) * t.v[k]; }
+    if(dot > bestScore){ second=best; secondScore=bestScore; best=t; bestScore=dot; }
+    else if(dot > secondScore){ second=t; secondScore=dot; }
+  });
+  return {best, second};
+}
+
+/* ============================= ICON HELPER ============================= */
+function iconSvg(key, size=24, strokeColor="currentColor"){
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${strokeColor}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]}</svg>`;
+}
+
+/* ============================= RENDER ============================= */
+const app = document.getElementById("app");
+const L = state.lang;
+
+function t(field){ return field[state.lang]; }
+
+function topbar(){
+  return `
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">${iconSvg("fighter",20,"#3E2A1C")}</div>
+      <div>
+        <div class="brand-name">${t(UI.brandName)}</div>
+        <div class="brand-sub">${t(UI.brandSub)}</div>
+      </div>
+    </div>
+    <div class="lang-toggle">
+      <button data-lang="bm" class="${state.lang==='bm'?'active':''}">BM</button>
+      <button data-lang="en" class="${state.lang==='en'?'active':''}">EN</button>
+    </div>
+  </div>`;
+}
+
+function renderStart(){
+  const chips = TYPES.map(ty=>`<span class="chip"><span class="chip-code mono">${typeCode(ty)}</span> ${t(ty.name)}</span>`).join("");
+  app.innerHTML = `
+    ${topbar()}
+    <div class="hero fade-in">
+      <div class="eyebrow"><span class="dot"></span>${t(UI.heroEyebrow)}</div>
+      <h1>${t(UI.heroTitle1)}<span>${t(UI.heroTitleHighlight)}</span>${t(UI.heroTitle2)}</h1>
+      <p class="lead">${t(UI.heroLead)}</p>
+      <div class="meta-row">
+        <div class="meta-item">${iconSvg("planner",16)}${t(UI.meta1)}</div>
+        <div class="meta-item">${iconSvg("explorer",16)}${t(UI.meta2)}</div>
+        <div class="meta-item">${iconSvg("leader",16)}${t(UI.meta3)}</div>
+      </div>
+      <button class="start-btn" id="startBtn">${t(UI.startBtn)} ${iconSvg("fighter",18,"#FBF3E3")}</button>
+      <div class="type-preview">
+        <div class="cap">${t(UI.previewCap)}</div>
+        <div class="chip-row">${chips}</div>
+      </div>
+    </div>
+    <footer class="disclaimer">${t(UI.disclaimer)}</footer>
+  `;
+  bindGlobal();
+  document.getElementById("startBtn").addEventListener("click", ()=>{ state.screen="quiz"; state.qIndex=0; render(); });
+}
+
+function renderQuiz(){
+  const total = QUESTIONS.length;
+  const idx = state.qIndex;
+  const q = QUESTIONS[idx];
+  const pct = Math.round((idx/total)*100);
+  const opts = q.opts.map((o,i)=>`
+    <button class="option" data-dim="${o.d}">
+      <span class="letter">${String.fromCharCode(65+i)}</span>
+      <span>${t(o.t)}</span>
+    </button>`).join("");
+
+  app.innerHTML = `
+    ${topbar()}
+    <div class="quiz-card fade-in">
+      <div class="trail">
+        <div class="trail-track"><div class="trail-fill" style="width:${pct}%"></div></div>
+        <div class="trail-label">${idx+1}/${total}</div>
+      </div>
+      <div class="q-num">${UI.qCounter[state.lang](idx+1, total)}</div>
+      <h2 class="q-text">${t(q.q)}</h2>
+      <div class="options">${opts}</div>
+      ${idx>0 ? `<button class="back-link" id="backBtn">← ${t(UI.back)}</button>` : ""}
+    </div>
+  `;
+  bindGlobal();
+  document.querySelectorAll(".option").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const d = btn.getAttribute("data-dim");
+      state.scores[d] += 3;
+      if(idx+1 >= total){
+        state.screen = "result";
+      } else {
+        state.qIndex += 1;
+      }
+      render();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+  const backBtn = document.getElementById("backBtn");
+  if(backBtn) backBtn.addEventListener("click", ()=>{ restart(); });
+}
+
+function renderResult(){
+  const {best, second} = computeResult();
+  const maxScore = Math.max(...Object.values(state.scores), 1);
+  const dimOrder = ["h","e","c","v","x","s"];
+  const bars = dimOrder.map(d=>{
+    const val = state.scores[d];
+    const pct = Math.round((val/ (QUESTIONS.length*3)) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label"><span class="mono" style="color:var(--red);">${LETTERS[d]}</span> ${t(UI.dims[d])}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="bar-pct mono">${pct}%</div>
+    </div>`;
+  }).join("");
+
+  const strengths = t(best.strengths).map(s=>`
+    <div class="strength-item">${iconSvg("mentor",15,"#1F4D37").replace('width="15" height="15"','width="15" height="15"')}<span>${s}</span></div>
+  `).join("");
+
+  const careers = t(best.careers).map(c=>`<span class="career-chip">${c}</span>`).join("");
+
+  const celebs = best.celebs.map(c=>{
+    const initials = c.name.split(" ").filter(w=>w.length>1 || /[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+    return `<div class="celeb-item">
+      <div class="celeb-avatar">${initials.slice(0,2)}</div>
+      <div>
+        <div class="celeb-name">${c.name}</div>
+        <div class="celeb-note">${t(c.note)}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  app.innerHTML = `
+    ${topbar()}
+    <div class="result-card fade-in">
+      <div class="result-inner">
+        <div class="kad-strip"></div>
+        <div class="kad-header">
+          <div class="kad-label">${t(UI.yourType)}</div>
+        </div>
+        <div class="code-hero">
+          <div class="code-hero-badge">${typeCode(best)}</div>
+          <div>
+            <div class="result-name" style="font-size:1.5rem;margin-bottom:2px;">${t(best.name)}</div>
+            <div class="code-hero-sub">${t(typeCodeLabel(best))}</div>
+          </div>
+        </div>
+        <div class="result-title-row" style="margin-top:16px;">
+          <div class="result-icon" style="background:${best.color}">${iconSvg(best.icon,32,"#FBF3E3")}</div>
+          <div>
+            <div class="result-name-en" style="font-size:1rem;">${state.lang==='bm' ? best.name.en : best.name.bm}</div>
+          </div>
+        </div>
+        <div class="result-tagline">${t(best.tagline)}</div>
+
+        <div class="letter-legend">${Object.entries(LETTERS).map(([dim,letter])=>{
+          const active = typeCode(best).includes(letter);
+          return `<span class="legend-pill ${active?'on':''}"><span class="legend-letter">${letter}</span>${t(UI.dims[dim])}</span>`;
+        }).join("")}</div>
+
+        <div class="section-title">${iconSvg("guardian",18)}${t(UI.strengthsTitle)}</div>
+        <div class="strength-list">${strengths}</div>
+
+        <div class="section-title">${iconSvg("mentor",18)}${t(UI.deepDiveTitle)}</div>
+        <div class="desc-text">${t(best.desc)}</div>
+
+        <div class="section-title">${iconSvg("analyst",18)}${t(UI.breakdownTitle)}</div>
+        <div class="bars">${bars}</div>
+
+        <div class="section-title">${iconSvg("leader",18)}${t(UI.careersTitle)}</div>
+        <div class="career-grid">${careers}</div>
+
+        <div class="section-title">${iconSvg("connector",18)}${t(UI.celebsTitle)}</div>
+        <div class="celeb-grid">${celebs}</div>
+
+        ${second ? `<div class="secondary-note">${t(UI.alsoShows)} <b>${typeCode(second)} — ${t(second.name)}</b> ${state.lang==='en' ? UI.traits.en : ''}</div>` : ""}
+
+        <div class="result-actions">
+          <button class="btn-primary" id="restartBtn">${iconSvg("explorer",16,"#FBF3E3")}${t(UI.restartBtn)}</button>
+        </div>
+      </div>
+    </div>
+    <footer class="disclaimer">${t(UI.disclaimer)}</footer>
+  `;
+  bindGlobal();
+  document.getElementById("restartBtn").addEventListener("click", restart);
+}
+
+function restart(){
+  state = {lang:state.lang, screen:"start", qIndex:0, scores:{h:0,e:0,c:0,v:0,x:0,s:0}};
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function bindGlobal(){
+  document.querySelectorAll("[data-lang]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      state.lang = btn.getAttribute("data-lang");
+      render();
+    });
+  });
+}
+
+function render(){
+  if(state.screen==="start") renderStart();
+  else if(state.screen==="quiz") renderQuiz();
+  else renderResult();
+}
+
+render();
+</script>
+</body>
+</html>
