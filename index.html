@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEJAK — Cari Kekuatan &amp; Kerjaya Anda</title>
+<title>JEJAK Mereka — Cari Kekuatan &amp; Kerjaya Anda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -88,6 +88,24 @@
 
   .origin-box{margin-top:22px;background:rgba(232,163,61,0.14);border:1.5px dashed var(--gold-deep);border-radius:14px;padding:16px 18px;font-size:0.9rem;line-height:1.6;color:var(--brown-deep);}
   .origin-box b{color:var(--red);}
+
+  .feature-box{margin-top:20px;background:var(--cream);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;}
+  .feature-box h4{margin:0 0 8px;font-size:1rem;font-weight:800;color:var(--brown-deep);display:flex;align-items:center;gap:8px;font-family:'Baloo 2',sans-serif;}
+  .feature-box h4 svg{width:18px;height:18px;color:var(--red);}
+  .feature-box p{margin:0 0 12px;font-size:0.87rem;line-height:1.6;color:var(--ink);opacity:0.85;}
+  .prompt-box{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:0.76rem;line-height:1.6;color:var(--brown-deep);max-height:130px;overflow-y:auto;white-space:pre-wrap;margin-bottom:12px;}
+  .btn-small{border-radius:10px;padding:9px 16px;font-weight:700;font-size:0.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1.6px solid var(--brown-deep);background:var(--brown-deep);color:var(--cream);}
+  .btn-small svg{width:14px;height:14px;}
+
+  .connect-panel{margin-top:22px;background:linear-gradient(155deg,var(--brown-deep),var(--ink));border-radius:18px;padding:20px 22px;color:var(--cream);}
+  .connect-panel h4{margin:0 0 6px;font-size:1.05rem;font-weight:800;font-family:'Baloo 2',sans-serif;}
+  .connect-panel p{margin:0 0 16px;font-size:0.85rem;line-height:1.6;opacity:0.88;}
+  .connect-row{display:flex;flex-wrap:wrap;gap:9px;}
+  .social-btn{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--cream);transition:background .15s ease;}
+  .social-btn:hover{background:rgba(255,255,255,0.22);}
+  .social-btn svg{width:18px;height:18px;}
+  .connect-cta{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--brown-deep);border:none;border-radius:11px;padding:0 16px;font-weight:700;font-size:0.83rem;text-decoration:none;height:38px;}
+  .connect-cta svg{width:15px;height:15px;}
   .chip{font-size:0.78rem;font-weight:600;padding:6px 12px 6px 8px;border-radius:999px;border:1.5px solid var(--line);background:var(--cream-2);color:var(--brown-deep);display:inline-flex;align-items:center;gap:7px;}
   .chip-code{font-size:0.7rem;font-weight:700;background:var(--brown-deep);color:var(--cream);padding:2px 7px;border-radius:999px;letter-spacing:0.03em;}
 
@@ -137,7 +155,9 @@
   .kad-code{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:600;color:var(--red);background:rgba(200,68,58,0.09);padding:4px 10px;border-radius:8px;}
 
   .code-hero{display:flex;align-items:center;gap:16px;margin-bottom:4px;}
-  .code-hero-badge{font-family:'Baloo 2',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:0.01em;color:var(--brown-deep);}
+  .code-hero-badge{font-family:'Baloo 2',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:0.01em;color:var(--brown-deep);position:relative;display:inline-flex;align-items:center;justify-content:center;width:96px;height:96px;border-radius:50%;flex-shrink:0;}
+  .code-hero-badge::before{content:"";position:absolute;inset:0;border-radius:50%;border:2.5px dashed currentColor;opacity:0.35;}
+  .code-hero-tag{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:2px;}
   .code-hero-sub{font-size:0.82rem;font-weight:600;color:var(--brown);opacity:0.75;margin-top:4px;}
   .letter-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
   .legend-pill{display:flex;align-items:center;gap:6px;font-size:0.74rem;font-weight:600;color:var(--brown-deep);background:var(--cream);border:1.5px solid var(--line);border-radius:999px;padding:5px 10px 5px 6px;}
@@ -167,6 +187,16 @@
   .bar-track{flex:1;height:9px;border-radius:999px;background:var(--cream-2);overflow:hidden;}
   .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--red));}
   .bar-pct{width:34px;text-align:right;font-size:0.74rem;font-weight:700;color:var(--brown);font-family:'IBM Plex Mono',monospace;}
+
+  .radar-wrap{background:var(--cream);border:1.5px solid var(--line);border-radius:18px;padding:20px 10px 8px;margin-bottom:16px;}
+
+  .glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+  .glossary-card{background:var(--cream);border:1.5px solid var(--line);border-radius:13px;padding:12px 13px;}
+  .glossary-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .glossary-letter{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.78rem;color:#fff;flex-shrink:0;}
+  .glossary-name{font-size:0.85rem;font-weight:700;color:var(--brown-deep);}
+  .glossary-def{font-size:0.78rem;line-height:1.5;color:var(--ink);opacity:0.78;}
+  @media (max-width:520px){.glossary-grid{grid-template-columns:1fr;}}
 
   .career-grid{display:flex;flex-wrap:wrap;gap:8px;}
   .career-chip{font-size:0.83rem;font-weight:600;padding:8px 13px;border-radius:11px;background:var(--green-deep);color:var(--cream);}
@@ -243,7 +273,7 @@
 /* ============================= DATA ============================= */
 
 const UI = {
-  brandName:{en:"JEJAK", bm:"JEJAK"},
+  brandName:{en:"JEJAK Mereka", bm:"JEJAK Mereka"},
   brandSub:{en:"Strength & career trail for everyday Malaysians", bm:"Jejak kekuatan & kerjaya untuk rakyat Malaysia"},
   heroEyebrow:{en:"A career-strengths quiz built for us", bm:"Kuiz kekuatan kerjaya untuk kita"},
   heroTitle1:{en:"What's your ", bm:"Apakah "},
@@ -261,7 +291,23 @@ const UI = {
   yourType:{en:"Your strength type", bm:"Jenis kekuatan anda"},
   strengthsTitle:{en:"Your core strengths", bm:"Kekuatan teras anda"},
   deepDiveTitle:{en:"The deep dive", bm:"Cerita lanjut"},
-  breakdownTitle:{en:"Your strength breakdown", bm:"Pecahan kekuatan anda"},
+  breakdownTitle:{en:"Your JEJAK Core", bm:"Teras JEJAK Anda"},
+  breakdownSub:{en:"Six traits behind every type, shortened to J · P · T · W · K · S.", bm:"Enam teras di sebalik setiap jenis, disingkatkan jadi J · P · T · W · K · S."},
+  glossaryTitle:{en:"What do these mean?", bm:"Apa maksud teras ini?"},
+  glossary:{
+    h:{en:"How much you push forward under pressure — picking up extra work, taking risks, and finding a way even when things are tight.",
+       bm:"Sejauh mana anda terus bergerak walaupun dalam tekanan — sanggup buat kerja tambahan, ambil risiko, dan cari jalan walau keadaan susah."},
+    e:{en:"How naturally you notice what people need and show up for them, through trust, care, and consistency.",
+       bm:"Sejauh mana anda perasan apa orang lain perlukan dan sentiasa ada untuk mereka, melalui kepercayaan, keprihatinan, dan konsistensi."},
+    c:{en:"How much you think and solve problems with your hands — understanding how things actually work and building or fixing them well.",
+       bm:"Sejauh mana anda berfikir dan selesaikan masalah dengan tangan — faham cara sesuatu berfungsi dan bina atau baiki dengan betul."},
+    v:{en:"How naturally you see the bigger picture and steer things toward a goal, even when others are focused on right now.",
+       bm:"Sejauh mana anda nampak gambaran besar dan gerakkan sesuatu ke arah matlamat, walaupun orang lain hanya fokus pada masa kini."},
+    x:{en:"How much you bring fresh ideas, new angles, and original expression to whatever you're doing.",
+       bm:"Sejauh mana anda bawa idea segar, sudut pandang baharu, dan ekspresi asli dalam apa jua yang anda buat."},
+    s:{en:"How much order, planning, and reliable systems you bring to chaos, and how much you notice the details others miss.",
+       bm:"Sejauh mana anda bawa keteraturan, perancangan, dan sistem yang boleh dipercayai dalam kekecohan, dan perasan perincian yang orang lain terlepas."},
+  },
   careersTitle:{en:"Careers that fit you", bm:"Kerjaya yang sesuai untuk anda"},
   celebsTitle:{en:"Malaysians (and others) who share your strengths", bm:"Tokoh yang sama kekuatan dengan anda"},
   restartBtn:{en:"Take it again", bm:"Ulang kuiz"},
@@ -271,6 +317,21 @@ const UI = {
             bm:(pct,code)=>`${pct}% daripada semua yang ambil JEJAK turut mendapat ${code}. Anda tak keseorangan.`},
   shareFooterLeft:{en:"jejak · strength & career trail", bm:"jejak · jejak kekuatan & kerjaya"},
   shareFooterRight:{en:"take the quiz", bm:"ambil kuiz ini"},
+
+  compareTitle:{en:"Compare with a friend", bm:"Banding dengan kawan"},
+  compareBody:{en:"Get a friend to take JEJAK too, then compare codes. Two Perintis in one team might clash over who's leading; a Perintis paired with a Penyokong usually works well — one pushes forward, one keeps things steady. No pairing is bad, just different chemistry worth knowing about.",
+               bm:"Ajak kawan ambil JEJAK sekali, lepas tu banding kod. Dua Perintis dalam satu pasukan mungkin bergaduh pasal siapa nak pimpin; pasangan Perintis dengan Penyokong selalunya sepadan — satu tolak ke depan, satu lagi jaga supaya semua stabil. Tiada pasangan yang teruk, cuma kimia berbeza yang elok anda tahu."},
+
+  aiPromptTitle:{en:"Ask AI to check a job for you", bm:"Suruh AI semak kerja untuk anda"},
+  aiPromptBody:{en:"Got a specific job posting in mind? Copy this prompt into ChatGPT, Claude, or any AI chat, paste the job description right after it, and get an honest read on how well it fits your strengths.",
+                bm:"Ada iklan kerja tertentu yang anda mata-matai? Salin prompt ni ke ChatGPT, Claude, atau AI chat mana-mana, tampal butiran kerja tu selepasnya, dan dapatkan pandangan jujur tentang sepadan ke tidak dengan kekuatan anda."},
+  copyPromptBtn:{en:"Copy prompt", bm:"Salin prompt"},
+  copiedLabel:{en:"Copied ✓", bm:"Dah disalin ✓"},
+
+  connectTitle:{en:"More from Mereka", bm:"Lagi daripada Mereka"},
+  connectBody:{en:"JEJAK is built in the spirit of Mereka Innovative Education. Follow along for their programmes, hubs, and future opportunities.",
+               bm:"JEJAK dibina dalam semangat Mereka Innovative Education. Ikuti untuk program, hab, dan peluang akan datang."},
+  shareLinkedinBtn:{en:"Share on LinkedIn", bm:"Kongsi di LinkedIn"},
   disclaimer:{en:"JEJAK is a self-reflection tool for fun and direction, not a clinical or scientific psychometric assessment. Use it as a starting point for conversations about your strengths — not a final verdict.",
               bm:"JEJAK adalah alat refleksi diri untuk keseronokan dan panduan, bukan penilaian psikometrik saintifik. Gunakan ia sebagai titik permulaan untuk fikir tentang kekuatan anda — bukan penilaian muktamad."},
   dims:{
@@ -472,6 +533,12 @@ const ICONS = {
   mentor:'<path d="M4 6h11v10H4z"/><path d="M15 9l5-2v9l-5-2"/>',
   leader:'<path d="M4 20l1-9 3 2 4-6 4 6 3-2 1 9z"/>',
   download:'<path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/>',
+  instagram:'<rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.4"/><circle cx="16.3" cy="7.7" r="0.6" fill="currentColor" stroke="none"/>',
+  facebook:'<path d="M14 4h-1.5A3.5 3.5 0 0 0 9 7.5V10H7v3h2v7h3v-7h2.5l.5-3H12V8a1 1 0 0 1 1-1h2z"/>',
+  linkedin:'<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8" cy="8.5" r="0.9" fill="currentColor" stroke="none"/><path d="M8 11v6M12 11v6M12 13.6c0-1.6 1-2.6 2.4-2.6S17 12 17 13.6V17"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.4 6 3.4 9s-1 6.5-3.4 9c-2.4-2.5-3.4-6-3.4-9s1-6.5 3.4-9z"/>',
+  ai:'<rect x="4" y="6" width="16" height="12" rx="3"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.2" fill="currentColor" stroke="none"/><path d="M12 6V3M9 3h6"/>',
+  friends:'<circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M2 20c0-3.3 2.5-6 6-6s6 2.7 6 6M14 20c0-2.4 1.6-4.4 4-4.9"/>',
 };
 
 // JEJAK's own strength-code system, like MBTI's letters — each dimension
@@ -593,7 +660,7 @@ const TYPES = [
   tagline:{en:"You need to make things — and you need them to look and feel right, not just work.",
            bm:"Anda perlu mencipta sesuatu — dan ia perlu nampak serta terasa betul, bukan sekadar berfungsi."},
   desc:{en:"You have an eye for it. Whether it's a plate of food, a piece of clothing, a photo, or a handmade craft, you notice what makes something beautiful and you can't help but try to make your own version even better. Unlike a purely creative dreamer, you're grounded in the actual making — you know your materials, your tools, your medium, deeply. This combination of taste and hands-on skill is rare and valuable, especially as more people pay for things that feel personal and well-made rather than mass-produced. Your challenge is often business-side: pricing your work fairly and getting it in front of the right customers.",
-           bm:"Anda mempunyai daya cita rasa yang tajam. Sama ada sepinggan makanan, sehelai pakaian, sekeping foto, atau kraf tangan, anda perasan apa yang buat sesuatu itu cantik, dan anda tak dapat tahan untuk cuba buat versi anda sendiri lebih baik. Berbeza dengan orang kreatif yang hanya berangan, anda membumi dalam proses membuat sebenar — anda kenal bahan, alat, dan medium anda dengan mendalam. Gabungan cita rasa dan kemahiran tangan ini jarang ditemui dan amat bernilai, terutamanya kini ramai sanggup bayar untuk sesuatu yang terasa peribadi dan dibuat dengan teliti berbanding pengeluaran besar-besaran. Cabaran anda selalunya di bahagian perniagaan — menetapkan harga yang adil dan mencari pelanggan yang tepat."},
+           bm:"Anda ada daya cita rasa yang tajam. Sama ada sepinggan makanan, sehelai pakaian, sekeping foto, atau kraf tangan, anda perasan apa yang buat sesuatu itu cantik, dan anda tak dapat tahan untuk cuba buat versi anda sendiri lebih baik. Berbeza dengan orang kreatif yang hanya berangan, anda membumi dalam proses membuat sebenar — anda kenal bahan, alat, dan medium anda dengan mendalam. Gabungan cita rasa dan kemahiran tangan ini jarang ditemui dan amat bernilai, lagi-lagi sekarang ramai sanggup bayar untuk sesuatu yang terasa peribadi dan dibuat dengan teliti berbanding pengeluaran besar-besaran. Cabaran anda selalunya di bahagian perniagaan — nak tetapkan harga yang adil dan cari pelanggan yang tepat."},
   strengths:{en:["Strong eye for aesthetics and finished quality","Deep hands-on mastery of a chosen medium","Turns ordinary materials into something distinctive","Takes pride in work that carries a personal signature"],
              bm:["Cita rasa estetik yang kuat dan mementingkan kualiti siap","Penguasaan mendalam dalam medium pilihan","Mengubah bahan biasa menjadi sesuatu yang istimewa","Bangga dengan hasil kerja yang membawa ciri peribadi"]},
   careers:{en:["Baker / pastry chef","Tailor or fashion designer","Furniture maker","Henna or nail artist","Graphic designer","Handicraft entrepreneur (batik, weaving)","Photographer"],
@@ -681,7 +748,7 @@ const TYPES = [
   tagline:{en:"You don't just explain things — you find the one way of explaining it that finally makes it click.",
            bm:"Anda bukan sekadar terangkan sesuatu — anda cari cara yang akhirnya buat orang faham."},
   desc:{en:"You have a gift for meeting people where they are. When someone's confused or struggling, you don't just repeat the instructions louder — you find a new analogy, a different example, a story that clicks for that specific person. This blend of genuine care and creative thinking makes you a natural teacher, whether or not that's your official job title. You probably already do this informally — the cousin who calls you for career advice, the junior colleague who quietly asks you instead of the manager. The challenge is recognising this as a real, monetisable skill rather than just something you do for free.",
-           bm:"Anda mempunyai bakat untuk memahami tahap orang lain. Bila seseorang keliru atau bergelut, anda tak sekadar ulang arahan dengan lebih kuat — anda cari analogi baharu, contoh berbeza, cerita yang benar-benar sesuai untuk orang itu. Gabungan sikap ambil berat yang tulen dan pemikiran kreatif ini menjadikan anda seorang guru semula jadi, walaupun bukan itu jawatan rasmi anda. Anda mungkin sudah buat ini secara tidak formal — sepupu yang telefon minta nasihat kerjaya, rakan sekerja junior yang diam-diam tanya anda dan bukan pengurus. Cabarannya ialah mengiktiraf ini sebagai kemahiran sebenar yang bernilai, bukan sekadar sesuatu yang anda buat secara percuma."},
+           bm:"Anda ada bakat semula jadi untuk faham tahap orang lain. Bila seseorang keliru atau bergelut, anda tak sekadar ulang arahan dengan lebih kuat — anda cari analogi baharu, contoh berbeza, cerita yang benar-benar sesuai untuk orang itu. Gabungan sikap ambil berat yang tulen dan pemikiran kreatif ini menjadikan anda seorang guru semula jadi, walaupun bukan itu jawatan rasmi anda. Anda mungkin dah buat ini secara tak formal pun — sepupu yang telefon minta nasihat kerjaya, rakan sekerja junior yang diam-diam tanya anda dan bukan pengurus. Cabarannya ialah sedar yang ini kemahiran sebenar yang bernilai, bukan sekadar sesuatu yang anda buat percuma sahaja."},
   strengths:{en:["Explains complex things in simple, memorable ways","Notices when someone is struggling before they say it","Adapts teaching style to the individual person","Builds confidence in people who doubt themselves"],
              bm:["Menerangkan perkara rumit dengan cara mudah dan mudah diingati","Perasan bila seseorang bergelut sebelum mereka meluahkannya","Menyesuaikan gaya mengajar mengikut individu","Membina keyakinan dalam diri orang yang ragu-ragu terhadap diri sendiri"]},
   careers:{en:["Tuition or vocational teacher","Kindergarten / preschool teacher","Corporate trainer","Youth programme facilitator","Librarian / community programme officer","Onboarding / training coordinator","Skills coach"],
@@ -703,7 +770,7 @@ const TYPES = [
   tagline:{en:"You lead from the front, not the office — people follow you because you work as hard as they do.",
            bm:"Anda memimpin dari barisan hadapan, bukan dari pejabat — orang ikut anda kerana anda bekerja seperti mereka juga."},
   desc:{en:"You earn respect the hard way — by being in it with your team, not above them. When there's a tough shift, a difficult deadline, or a messy problem, you're not the one delegating from a distance, you're the one rolling up your sleeves alongside everyone else. This combination of hustle and genuine care for your people is what separates a real leader from someone who just has the title. People trust you because your actions and your words match. Your growth edge is learning to step back sometimes — a good Peneraju also knows how to build others up to lead without you.",
-           bm:"Anda memperoleh hormat dengan cara yang sukar — dengan berada bersama pasukan, bukan di atas mereka. Bila ada shift yang berat, tarikh akhir yang mencabar, atau masalah yang rumit, anda bukan yang mengarah dari jauh, tapi turut turun tangan bersama semua orang. Gabungan semangat juang dan sikap ambil berat yang tulen terhadap pasukan inilah yang membezakan pemimpin sebenar daripada sekadar jawatan. Orang percaya kepada anda kerana tindakan dan kata-kata anda selari. Ruang untuk berkembang ialah belajar untuk sesekali mundur — Peneraju yang baik juga tahu cara membina orang lain supaya boleh memimpin tanpa anda."},
+           bm:"Anda dapat hormat orang dengan cara yang tak senang — dengan sentiasa ada bersama pasukan, bukan duduk di atas mereka. Bila ada shift yang berat, tarikh akhir yang mencabar, atau masalah yang rumit, anda bukan yang mengarah dari jauh, tapi turut turun padang bersama semua orang. Gabungan semangat juang dan sikap ambil berat yang tulen terhadap pasukan inilah yang membezakan pemimpin sebenar daripada sekadar jawatan. Orang percayakan anda sebab tindakan dan kata-kata anda selari. Ruang untuk berkembang ialah belajar untuk sesekali mundur — Peneraju yang baik juga tahu cara bina orang lain supaya boleh memimpin tanpa anda."},
   strengths:{en:["Leads by example, not just instruction","Works alongside the team under pressure","Builds loyalty through consistency and fairness","Makes fast decisions when things get chaotic"],
              bm:["Memimpin melalui teladan, bukan sekadar arahan","Bekerja bersama pasukan ketika tekanan","Membina kesetiaan melalui konsistensi dan keadilan","Membuat keputusan pantas ketika keadaan huru-hara"]},
   careers:{en:["Production supervisor","Site foreman","Restaurant / outlet manager","Warehouse or factory team leader","Cooperative (koperasi) manager","Small business owner-operator","Shift manager"],
@@ -744,6 +811,57 @@ function computeResult(){
 /* ============================= ICON HELPER ============================= */
 function iconSvg(key, size=24, strokeColor="currentColor"){
   return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${strokeColor}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]}</svg>`;
+}
+
+/* ============================= RADAR CHART (JEJAK Core) ============================= */
+function buildRadarSVG(scores, color){
+  const order = ["h","e","c","v","x","s"];
+  const n = order.length;
+  const cx=150, cy=150, maxR=100;
+  const angleStep = (Math.PI*2)/n;
+  const startAngle = -Math.PI/2;
+  const maxScore = QUESTIONS.length*3;
+
+  function pointFor(i, r){
+    const angle = startAngle + i*angleStep;
+    return [cx + r*Math.cos(angle), cy + r*Math.sin(angle)];
+  }
+
+  let gridPaths = "";
+  [0.33,0.66,1].forEach(frac=>{
+    const pts = order.map((d,i)=>pointFor(i, maxR*frac).map(v=>v.toFixed(1)).join(",")).join(" ");
+    gridPaths += `<polygon points="${pts}" fill="none" stroke="rgba(34,27,20,0.13)" stroke-width="1"/>`;
+  });
+
+  const axisLines = order.map((d,i)=>{
+    const [x,y] = pointFor(i, maxR);
+    return `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(34,27,20,0.13)" stroke-width="1"/>`;
+  }).join("");
+
+  const dataPts = order.map((d,i)=>{
+    const pct = Math.min(1, (scores[d]||0)/maxScore);
+    const [x,y] = pointFor(i, maxR*pct);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  const dots = order.map((d,i)=>{
+    const pct = Math.min(1, (scores[d]||0)/maxScore);
+    const [x,y] = pointFor(i, maxR*pct);
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="${color}"/>`;
+  }).join("");
+
+  const labels = order.map((d,i)=>{
+    const [x,y] = pointFor(i, maxR+24);
+    return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'IBM Plex Mono',monospace" font-weight="700" font-size="15" fill="${color}">${LETTERS[d]}</text>`;
+  }).join("");
+
+  return `<svg viewBox="0 0 300 300" width="100%" height="auto" style="max-width:280px;display:block;margin:0 auto;">
+    ${gridPaths}
+    ${axisLines}
+    <polygon points="${dataPts}" fill="${color}" fill-opacity="0.26" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>
+    ${dots}
+    ${labels}
+  </svg>`;
 }
 
 /* ============================= RENDER ============================= */
@@ -881,7 +999,7 @@ function renderResult(){
     <div class="share-card-wrap">
       <div class="share-card" id="shareCardInner" style="background:linear-gradient(160deg, ${best.color}, var(--ink));">
         <div class="sc-strip" style="background:linear-gradient(90deg,var(--gold),var(--red),var(--green));"></div>
-        <div class="sc-brand"><span class="sc-brand-dot"></span>JEJAK</div>
+        <div class="sc-brand"><span class="sc-brand-dot"></span>JEJAK <span style="opacity:0.75;font-weight:600;">× Mereka</span></div>
         <div class="sc-code">${typeCode(best)}</div>
         <div class="sc-name">${t(best.name)}</div>
         <div class="sc-name-en">${state.lang==='bm' ? best.name.en : best.name.bm}</div>
@@ -904,8 +1022,9 @@ function renderResult(){
           <div class="kad-label">${t(UI.yourType)}</div>
         </div>
         <div class="code-hero">
-          <div class="code-hero-badge">${typeCode(best)}</div>
+          <div class="code-hero-badge" style="color:${best.color};">${typeCode(best)}</div>
           <div>
+            <div class="code-hero-tag">${t(UI.yourType)}</div>
             <div class="result-name" style="font-size:1.5rem;margin-bottom:2px;">${t(best.name)}</div>
             <div class="code-hero-sub">${t(typeCodeLabel(best))}</div>
           </div>
@@ -927,26 +1046,62 @@ function renderResult(){
 
         <div class="origin-box"><b>${t(UI.originTitle)}</b> ${t(best.origin)}</div>
 
-        <div class="section-title">${iconSvg("guardian",18)}${t(UI.strengthsTitle)}</div>
+        <div class="section-title">${iconSvg("guardian",18,best.color)}${t(UI.strengthsTitle)}</div>
         <div class="strength-list">${strengths}</div>
 
-        <div class="section-title">${iconSvg("mentor",18)}${t(UI.deepDiveTitle)}</div>
+        <div class="section-title">${iconSvg("mentor",18,best.color)}${t(UI.deepDiveTitle)}</div>
         <div class="desc-text">${t(best.desc)}</div>
 
-        <div class="section-title">${iconSvg("analyst",18)}${t(UI.breakdownTitle)}</div>
+        <div class="section-title">${iconSvg("analyst",18,best.color)}${t(UI.breakdownTitle)}</div>
+        <div class="desc-text" style="margin-bottom:14px;font-size:0.86rem;opacity:0.7;">${t(UI.breakdownSub)}</div>
+        <div class="radar-wrap">${buildRadarSVG(state.scores, best.color)}</div>
+        <div class="glossary-title" style="font-size:0.85rem;font-weight:700;color:var(--brown-deep);margin-bottom:10px;">${t(UI.glossaryTitle)}</div>
+        <div class="glossary-grid">${Object.entries(LETTERS).map(([dim,letter])=>`
+          <div class="glossary-card">
+            <div class="glossary-head">
+              <span class="glossary-letter" style="background:${best.color};">${letter}</span>
+              <span class="glossary-name">${t(UI.dims[dim])}</span>
+            </div>
+            <div class="glossary-def">${t(UI.glossary[dim])}</div>
+          </div>
+        `).join("")}</div>
         <div class="bars">${bars}</div>
 
-        <div class="section-title">${iconSvg("leader",18)}${t(UI.careersTitle)}</div>
+        <div class="section-title">${iconSvg("leader",18,best.color)}${t(UI.careersTitle)}</div>
         <div class="career-grid">${careers}</div>
 
-        <div class="section-title">${iconSvg("connector",18)}${t(UI.celebsTitle)}</div>
+        <div class="section-title">${iconSvg("connector",18,best.color)}${t(UI.celebsTitle)}</div>
         <div class="celeb-grid">${celebs}</div>
 
         ${second ? `<div class="secondary-note">${t(UI.alsoShows)} <b>${typeCode(second)} — ${t(second.name)}</b> ${state.lang==='en' ? UI.traits.en : ''}${closeness>=70 ? `<br><br>${UI.hybridNote[state.lang](closeness)}` : ""}</div>` : ""}
 
+        <div class="feature-box">
+          <h4>${iconSvg("friends",18)}${t(UI.compareTitle)}</h4>
+          <p>${t(UI.compareBody)}</p>
+        </div>
+
+        <div class="feature-box">
+          <h4>${iconSvg("ai",18)}${t(UI.aiPromptTitle)}</h4>
+          <p>${t(UI.aiPromptBody)}</p>
+          <div class="prompt-box" id="aiPromptBox">${buildAiPrompt(best)}</div>
+          <button class="btn-small" id="copyPromptBtn">${iconSvg("download",14,"#FBF3E3")}<span id="copyPromptLabel">${t(UI.copyPromptBtn)}</span></button>
+        </div>
+
         <div class="result-actions">
           <button class="btn-primary" id="downloadBtn">${iconSvg("download",16,"#FBF3E3")}<span id="downloadBtnLabel">${t(UI.downloadBtn)}</span></button>
           <button class="btn-ghost" id="restartBtn">${iconSvg("explorer",16)}${t(UI.restartBtn)}</button>
+        </div>
+
+        <div class="connect-panel">
+          <h4>${t(UI.connectTitle)}</h4>
+          <p>${t(UI.connectBody)}</p>
+          <div class="connect-row">
+            <a class="social-btn" href="https://www.instagram.com/mereka.io/" target="_blank" rel="noopener">${iconSvg("instagram",18)}</a>
+            <a class="social-btn" href="https://www.facebook.com/mereka.io" target="_blank" rel="noopener">${iconSvg("facebook",18)}</a>
+            <a class="social-btn" href="https://www.linkedin.com/company/mereka/" target="_blank" rel="noopener">${iconSvg("linkedin",18)}</a>
+            <a class="social-btn" href="https://mereka.io" target="_blank" rel="noopener">${iconSvg("globe",18)}</a>
+            <a class="connect-cta" href="#" id="linkedinShareBtn">${iconSvg("linkedin",15,"#3E2A1C")}${t(UI.shareLinkedinBtn)}</a>
+          </div>
         </div>
       </div>
     </div>
@@ -956,8 +1111,11 @@ function renderResult(){
   bindGlobal();
   document.getElementById("restartBtn").addEventListener("click", restart);
   document.getElementById("downloadBtn").addEventListener("click", ()=>downloadCard(best));
+  document.getElementById("copyPromptBtn").addEventListener("click", ()=>copyPrompt(best));
+  document.getElementById("linkedinShareBtn").addEventListener("click", (e)=>{ e.preventDefault(); shareToLinkedin(best); });
   fireConfetti(best.color);
   loadCommunityStats(best);
+  logResultToSheet(best, second, closeness);
 }
 
 function restart(){
@@ -1015,6 +1173,37 @@ async function downloadCard(type){
 }
 
 /* ---------- shared community stat (anonymous, aggregate only) ---------- */
+/* ============================= GOOGLE SHEETS LOGGING ============================= */
+// Paste your deployed Google Apps Script Web App URL below to start logging
+// anonymous results to a Google Sheet. Leave blank to skip logging entirely.
+// See the setup instructions provided alongside this file.
+const SHEETS_WEBHOOK_URL = ""; // e.g. "https://script.google.com/macros/s/AKfycb.../exec"
+
+async function logResultToSheet(best, second, closeness){
+  if(!SHEETS_WEBHOOK_URL) return; // not configured yet — skip silently
+  try{
+    const payload = {
+      timestamp: new Date().toISOString(),
+      code: typeCode(best),
+      type_bm: best.name.bm,
+      type_en: best.name.en,
+      secondCode: second ? typeCode(second) : "",
+      closenessPct: closeness,
+      lang: state.lang,
+      scores: state.scores
+    };
+    await fetch(SHEETS_WEBHOOK_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+  }catch(err){
+    console.error("Could not log result to Google Sheet:", err);
+    // fail silently — this must never block the results page
+  }
+}
+
 async function loadCommunityStats(best){
   const slot = document.getElementById("statNoteSlot");
   if(!slot || !window.storage) return;
@@ -1036,6 +1225,67 @@ async function loadCommunityStats(best){
     console.error("Community stats unavailable:", err);
     // fail silently — this is a nice-to-have, not core functionality
   }
+}
+
+/* ---------- AI job-fit prompt ---------- */
+function buildAiPrompt(type){
+  const strengths = t(type.strengths).join("; ");
+  const careers = t(type.careers).join(", ");
+  if(state.lang === "bm"){
+    return `Keputusan kekuatan saya dalam kuiz JEJAK ialah ${typeCode(type)} — ${type.name.bm} (${type.name.en}).
+
+Kekuatan teras saya: ${strengths}.
+Kerjaya yang biasanya sesuai dengan jenis ini: ${careers}.
+
+Saya akan tampal satu iklan jawatan kosong di bawah. Berdasarkan kekuatan saya di atas, beri saya analisis yang jujur: adakah jawatan ini benar-benar sesuai dengan cara saya bekerja, bahagian mana yang mungkin buat saya bersemangat, bahagian mana yang mungkin melelahkan saya, dan apa yang perlu saya tanya atau perjelaskan sebelum memohon. Tolong jujur, jangan sekadar bagi semangat.
+
+[TAMPAL BUTIRAN IKLAN JAWATAN DI SINI]`;
+  }
+  return `My strength result on the JEJAK quiz is ${typeCode(type)} — ${type.name.en} (${type.name.bm} in Malay).
+
+My core strengths: ${strengths}.
+Careers that typically fit this type: ${careers}.
+
+I'm going to paste a job posting below. Based on my strengths above, give me an honest analysis: does this role genuinely fit how I work, which parts would likely energise me, which parts might drain me, and what I should ask or clarify before applying. Be direct, not just encouraging.
+
+[PASTE JOB DESCRIPTION HERE]`;
+}
+
+async function copyPrompt(type){
+  const label = document.getElementById("copyPromptLabel");
+  const text = buildAiPrompt(type);
+  const original = label.textContent;
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    label.textContent = t(UI.copiedLabel);
+    setTimeout(()=>{ label.textContent = original; }, 2000);
+  }catch(err){
+    console.error("Could not copy prompt:", err);
+  }
+}
+
+/* ---------- LinkedIn share ---------- */
+function shareToLinkedin(type){
+  const caption = state.lang === "bm"
+    ? `Saya baru dapat tahu kekuatan saya di JEJAK ialah ${typeCode(type)} — ${type.name.bm} (${type.name.en}). Kuiz kekuatan & kerjaya ni dibina dalam semangat Mereka Innovative Education. Cuba sendiri dan ikuti Mereka untuk lebih banyak: https://mereka.io`
+    : `I just found out my JEJAK type is ${typeCode(type)} — ${type.name.en} (${type.name.bm} in Malay). This strength & career quiz was built in the spirit of Mereka Innovative Education. Give it a go and follow Mereka for more: https://mereka.io`;
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(caption).catch(()=>{});
+    }
+  }catch(e){ /* clipboard optional here */ }
+  window.open("https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent("https://mereka.io"), "_blank", "noopener");
 }
 
 function bindGlobal(){
